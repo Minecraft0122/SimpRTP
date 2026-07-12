@@ -13,6 +13,8 @@ BetterRTP uses and is compiled with the following libraries:
 - [Folia API](https://github.com/PaperMC/Folia) (provided) - Modern Folia server API target for chunk loading and scheduler compatibility.
 - [FoliaLib](https://github.com/TechnicallyCoded/FoliaLib) (included) - Library for interfacing with Folia specific APIs, used for cross-platform timers.
 
+Builds targeting Folia 26.1.2+ require Java 25 or newer.
+
 ## Build instructions on Ubuntu
 
 mvn clean install

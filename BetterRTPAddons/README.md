@@ -14,6 +14,8 @@ BetterRTPAddons uses and is compiled with the following libraries:
 
 - [Folia API](https://github.com/PaperMC/Folia) (provided) - Modern Folia server API target for scheduler and teleport compatibility.
 
+Builds targeting Folia 26.1.2+ require Java 25 or newer.
+
 ## Where's the Wiki?  
 The wiki is available [here](../../../wiki)!
     
