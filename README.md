@@ -10,7 +10,7 @@ feel free to fork one of the language files and help translate!
 BetterRTP uses and is compiled with the following libraries:
 
 - [ParticleLib](https://github.com/ByteZ1337/ParticleLib) (included) - Particles library by ByteZ1337. Find all supported particles [here](https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java)
-- [PaperLib](https://github.com/PaperMC/PaperLib) (included) - Library for interfacing with PaperMC specific APIs, used for async chunk loading.
+- [Folia API](https://github.com/PaperMC/Folia) (provided) - Modern Folia server API target for chunk loading and scheduler compatibility.
 - [FoliaLib](https://github.com/TechnicallyCoded/FoliaLib) (included) - Library for interfacing with Folia specific APIs, used for cross-platform timers.
 
 ## Build instructions on Ubuntu

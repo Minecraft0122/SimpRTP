@@ -12,7 +12,7 @@ feel free to fork one of the language files and help translate!
 ## Libraries
 BetterRTPAddons uses and is compiled with the following libraries:
 
-- [PaperLib](https://github.com/PaperMC/PaperLib) (included) - Library for interfacing with PaperMC specific APIs, used for async chunk loading.
+- [Folia API](https://github.com/PaperMC/Folia) (provided) - Modern Folia server API target for scheduler and teleport compatibility.
 
 ## Where's the Wiki?  
 The wiki is available [here](../../../wiki)!
