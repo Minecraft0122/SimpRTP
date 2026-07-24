@@ -18,7 +18,7 @@ public class HelperRTP_Check {
         if (isRTPing(player)) { //Is RTP'ing
             return RTP_ERROR_REQUEST_REASON.IS_RTPING;
         }
-        // Not forced and has 'betterrtp.world.<world>'
+        // Not forced and has 'simprtp.world.<world>'
         if (sendi == player && !PermissionCheck.getAWorld(sendi, pWorld.getWorld().getName())) {
             return RTP_ERROR_REQUEST_REASON.NO_PERMISSION;
         }

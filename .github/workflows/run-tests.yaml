@@ -5,9 +5,12 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
-    name: Build BetterRTP and Addons
+    name: Build SimpRTP and Addons
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -22,7 +25,7 @@ jobs:
           java-version: '25'
           cache: maven
 
-      - name: Build and install BetterRTP
+      - name: Build and install SimpRTP
         run: mvn -B -DskipTests install
 
       - name: Smoke test on Folia 26.1.2 build 8
@@ -43,7 +46,7 @@ jobs:
             "https://piston-data.mojang.com/v1/objects/97ccd4c0ed3f81bbb7bfacddd1090b0c56f9bc51/server.jar"
           echo "cd47e7c38328f64768fd17af8fcd8b22496b40b63d4ffee81e71ae059fedcb42  $server_dir/cache/mojang_26.1.2.jar" | sha256sum --check
 
-          cp target/BetterRTP-*.jar "$server_dir/plugins/BetterRTP.jar"
+          cp target/SimpRTP-*.jar "$server_dir/plugins/SimpRTP.jar"
           printf 'eula=true\n' > "$server_dir/eula.txt"
           printf '%s\n' \
             'allow-nether=false' \
@@ -87,7 +90,7 @@ jobs:
 
           def run_checks():
               if process.poll() is None:
-                  process.stdin.write("version\nplugins\nbrtp version\nbrtp info\n")
+                  process.stdin.write("version\nplugins\nsimprtp version\nsimprtp info\n")
                   process.stdin.flush()
                   threading.Timer(5, stop_server).start()
 
@@ -115,14 +118,14 @@ jobs:
 
           required = (
               "Loading Folia 26.1.2-8-",
-              "Enabling BetterRTP v",
-              "[BetterRTP] Version #",
-              "----- BetterRTP | Info -----",
+              "Enabling SimpRTP v",
+              "[SimpRTP] Version #",
+              "----- SimpRTP | Info -----",
           )
           missing = [entry for entry in required if entry not in log]
           forbidden = (
-              "Could not load 'plugins/BetterRTP.jar'",
-              "Error occurred while enabling BetterRTP",
+              "Could not load 'plugins/SimpRTP.jar'",
+              "Error occurred while enabling SimpRTP",
               "Thread ownership",
           )
           found = [entry for entry in forbidden if entry in log]
@@ -136,20 +139,63 @@ jobs:
               sys.exit(1)
           PY
 
-      - name: Build BetterRTPAddons
+      - name: Build SimpRTPAddons
         run: mvn -B -DskipTests package
         working-directory: BetterRTPAddons
 
-      - name: Upload BetterRTP artifact
+      - name: Upload SimpRTP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: BetterRTP
-          path: target/BetterRTP-*.jar
+          name: SimpRTP
+          path: target/SimpRTP-*.jar
           if-no-files-found: error
 
-      - name: Upload BetterRTPAddons artifact
+      - name: Upload SimpRTPAddons artifact
         uses: actions/upload-artifact@v4
         with:
-          name: BetterRTPAddons
-          path: BetterRTPAddons/target/BetterRTPAddons-*.jar
+          name: SimpRTPAddons
+          path: BetterRTPAddons/target/SimpRTPAddons-*.jar
           if-no-files-found: error
+
+      - name: Publish GitHub Release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          version="$(python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+
+          namespace = {"m": "http://maven.apache.org/POM/4.0.0"}
+          root = ET.parse("pom.xml").getroot()
+          print(root.findtext("m:version", namespaces=namespace))
+          PY
+          )"
+
+          tag="v${version}"
+          title="SimpRTP ${version}"
+          main_jar="target/SimpRTP-${version}.jar"
+          addons_jar="BetterRTPAddons/target/SimpRTPAddons-${version}.jar"
+
+          test -f "$main_jar"
+          test -f "$addons_jar"
+
+          cat > release-notes.md <<EOF
+          Automated release for SimpRTP ${version}.
+
+          Built from commit ${GITHUB_SHA}.
+
+          Artifacts:
+          - SimpRTP-${version}.jar
+          - SimpRTPAddons-${version}.jar
+          EOF
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --title "$title" --notes-file release-notes.md --latest
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --title "$title" --notes-file release-notes.md --latest
+          fi
+
+          gh release upload "$tag" "$main_jar" "$addons_jar" --clobber

@@ -1,61 +1,61 @@
 permissions:
-    betterrtp.*:
+    simprtp.*:
         children:
-            betterrtp.use: true
-            betterrtp.world: true
-            betterrtp.world.*: true
-            betterrtp.bypass.*: true
-            betterrtp.player: true
-            betterrtp.reload: true
-            betterrtp.updater: true
-            betterrtp.group.*: true
-    betterrtp.world:
+            simprtp.use: true
+            simprtp.world: true
+            simprtp.world.*: true
+            simprtp.bypass.*: true
+            simprtp.player: true
+            simprtp.reload: true
+            simprtp.updater: true
+            simprtp.group.*: true
+    simprtp.world:
         description: Ability to use the world command
-    betterrtp.world.*:
+    simprtp.world.*:
         description: RTP in all enabled worlds
-    betterrtp.world.<world>:
+    simprtp.world.<world>:
         description: RTP in world named world
-    betterrtp.bypass.*:
+    simprtp.bypass.*:
         children:
-            betterrtp.bypass.cooldown: true
-            betterrtp.bypass.delay: true
-            betterrtp.bypass.economy: true
-            betterrtp.bypass.hunger: true
-    betterrtp.use:
+            simprtp.bypass.cooldown: true
+            simprtp.bypass.delay: true
+            simprtp.bypass.economy: true
+            simprtp.bypass.hunger: true
+    simprtp.use:
         description: Use RTP command
         default: true
-    betterrtp.player:
+    simprtp.player:
         description: RTP another player
-    betterrtp.biome:
+    simprtp.biome:
         description: RTP to specific biomes
-    betterrtp.sign:
+    simprtp.sign:
         description: Ability to create an RTP sign
     #Locations
-    betterrtp.location:
+    simprtp.location:
         description: Ability to use the location command
-    betterrtp.location.*:
+    simprtp.location.*:
         description: Ability to use all locations if permissions are enabled in locations.yml
         default: op
     #Bypasses
-    betterrtp.bypass.cooldown:
+    simprtp.bypass.cooldown:
         description: Bypass cooldowns
-    betterrtp.bypass.delay:
+    simprtp.bypass.delay:
         description: Bypass delays
-    betterrtp.bypass.economy:
+    simprtp.bypass.economy:
         description: Bypass economy
-    betterrtp.bypass.hunger:
+    simprtp.bypass.hunger:
         description: Bypass hunger
     #Reload
-    betterrtp.reload:
+    simprtp.reload:
         description: Reload the config
         default: op
-    betterrtp.updater:
+    simprtp.updater:
         description: Get notification on new updates
         default: op
-    betterrtp.test:
+    simprtp.test:
         description: While debugger enabled, be able to test particles, potion effects and sounds
         default: op
     #Permission Groups
-    betterrtp.group.*:
+    simprtp.group.*:
         description: Allow access to all permission groups
         default: op

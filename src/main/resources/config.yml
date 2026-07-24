@@ -1,4 +1,4 @@
-# BetterRTP plugin by SuperRonanCraft! (Join my Public Server at ronanplugins.com) #
+# SimpRTP plugin by SuperRonanCraft! (Join my Public Server at ronanplugins.com) #
 # Need help? go to https://ronanplugins.com/discord! #
 
 Language-File: 'en.yml'
@@ -46,7 +46,7 @@ Settings:
   Debugger: false
   ## Amount of chunks to preload around a safe location
   PreloadRadius: 5
-  ## Maximum amount of tries before BetterRTP gives up and sends a NotSafeMessage #
+  ## Maximum amount of tries before SimpRTP gives up and sends a NotSafeMessage #
   MaxAttempts: 32
   RtpOnFirstJoin: # Will execute as console to override delays
     Enabled: false # Make the player rtp when joining the server for the first time
@@ -85,7 +85,7 @@ Default:
   MinY: 0
   RTPOnDeath: false
 
-## Blocks BetterRTP will NOT teleport onto. More Blocks at: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html #
+## Blocks SimpRTP will NOT teleport onto. More Blocks at: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html #
 BlacklistedBlocks:
   - stationary_water
   - stationary_lava
@@ -147,10 +147,10 @@ WorldType: # Available types are NORMAL, NETHER
   - world_nether: NETHER
   - world_the_end: NORMAL
 
-PermissionGroup: #Player requires "betterrtp.group.<group_name>" to trigger these configs
+PermissionGroup: #Player requires "simprtp.group.<group_name>" to trigger these configs
   Enabled: false
   Groups:
-    - vip: # permission: betterrtp.group.vip
+    - vip: # permission: simprtp.group.vip
         - Build_World: #World named "Build_World"
             Priority: 0 #Lower the more prioritized
             MaxRadius: 10000
@@ -167,7 +167,7 @@ PermissionGroup: #Player requires "betterrtp.group.<group_name>" to trigger thes
             Price: 10
             MaxY: 320
             MinY: 0
-    - vip2: # permission: betterrtp.group.vip2
+    - vip2: # permission: simprtp.group.vip2
         - Build_World:
             MaxRadius: 25000
             MinRadius: 10000

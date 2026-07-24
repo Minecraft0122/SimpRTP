@@ -8,6 +8,10 @@ import org.jetbrains.annotations.NotNull;
 public interface PermissionCheck {
 
     static String getPrefix() {
+        return "simprtp.";
+    }
+
+    static String getLegacyPrefix() {
         return "betterrtp.";
     }
 

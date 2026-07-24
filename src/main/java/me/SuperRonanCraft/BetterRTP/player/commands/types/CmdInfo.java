@@ -140,7 +140,7 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
     //World
     public static void sendInfoWorld(CommandSender sendi, List<String> list, String label, String[] args) { //Send info
         boolean upload = Arrays.asList(args).contains("_UPLOAD_");
-        list.add(0, "&e&m-----&6 BetterRTP &8| Info &e&m-----");
+        list.add(0, "&e&m-----&6 SimpRTP &8| Info &e&m-----");
         list.forEach(str -> list.set(list.indexOf(str), Message.color(str)));
 
         String cmd = "/" + label + " " + String.join(" ", args);
@@ -149,7 +149,7 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
             if (sendi instanceof Player) {
                 TextComponent component = new TextComponent(Message.color("&7- &7Click to upload command log to &flogs.ronanplugins.com"));
                 component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, cmd + " _UPLOAD_"));
-                component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Message.color("&6Suggested command&f: &7" + "/betterrtp " + String.join(" ", args) + " _UPLOAD_")).create()));
+                component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Message.color("&6Suggested command&f: &7" + cmd + " _UPLOAD_")).create()));
                 ((Player) sendi).spigot().sendMessage(component);
             } else {
                 sendi.sendMessage("Execute `" + cmd + " _UPLOAD_`" + " to upload command log to https://logs.ronanplugins.com");

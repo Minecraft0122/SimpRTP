@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-BetterRTP bundles the following third-party libraries in its plugin jar.
+SimpRTP bundles the following third-party libraries in its plugin jar.
 
 ## FoliaLib
 

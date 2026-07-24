@@ -38,7 +38,7 @@ public class CmdLogger implements RTPCommand {
             if (sendi instanceof Player) {
                 TextComponent component = new TextComponent(Message.color("&7- &7Click to upload log to &flogs.ronanplugins.com"));
                 component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, cmd + " _UPLOAD_"));
-                component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Message.color("&6Suggested command&f: &7" + "/betterrtp " + String.join(" ", args) + " _UPLOAD_")).create()));
+                component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Message.color("&6Suggested command&f: &7" + cmd + " _UPLOAD_")).create()));
                 ((Player) sendi).spigot().sendMessage(component);
             } else {
                 sendi.sendMessage("Execute `" + cmd + " _UPLOAD_`" + " to upload log to https://logs.ronanplugins.com");

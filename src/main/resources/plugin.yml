@@ -1,6 +1,6 @@
 main: me.SuperRonanCraft.BetterRTP.BetterRTP
 version: ${project.version}
-name: BetterRTP
+name: SimpRTP
 author: SuperRonanCraft
 folia-supported: true #As of 3.6.8 thanks to LOOHP#6007, TechnicallyCoded#9095 and loving11ish#2066
 softdepend:
@@ -22,72 +22,72 @@ softdepend:
     - Pueblos #Respect Pueblos regions (https://www.spigotmc.org/resources/pueblos.91255/) (My Favorite :D)
     # Convince
     - ProtocolLib
-    - Multiverse-Core #Forcing Multiverse to load BEFORE BetterRTP
+    - Multiverse-Core #Forcing Multiverse to load BEFORE SimpRTP
     - Essentials #adds `/back` support
     - PlaceholderAPI
     - HuskClaims #Respect HuskClaims areas (https://www.spigotmc.org/resources/huskclaims-1-17-1-21-modern-golden-shovel-land-claiming-fully-cross-server-compatible.114467/) (fixes race condition that breaks hooking)
 api-version: '26.1'
 
 commands:
-    betterrtp:
-        aliases: [brtp, rtp, randomtp, wild, wildtp]
+    simprtp:
+        aliases: [betterrtp, brtp, rtp, randomtp, wild, wildtp]
         description: Randomly teleport to a location
 
 permissions:
-    betterrtp.*:
+    simprtp.*:
         children:
-            betterrtp.use: true
-            betterrtp.world.*: true
-            betterrtp.bypass.*: true
-            betterrtp.player: true
-            betterrtp.reload: true
-            betterrtp.updater: true
-            betterrtp.biome: true
-            betterrtp.version: true
-    betterrtp.world.*:
+            simprtp.use: true
+            simprtp.world.*: true
+            simprtp.bypass.*: true
+            simprtp.player: true
+            simprtp.reload: true
+            simprtp.updater: true
+            simprtp.biome: true
+            simprtp.version: true
+    simprtp.world.*:
         description: RTP in all enabled worlds
-    betterrtp.bypass.*:
+    simprtp.bypass.*:
             children:
-                betterrtp.bypass.cooldown: true
-                betterrtp.bypass.delay: true
-                betterrtp.bypass.economy: true
-    betterrtp.use:
+                simprtp.bypass.cooldown: true
+                simprtp.bypass.delay: true
+                simprtp.bypass.economy: true
+    simprtp.use:
         description: Use RTP command
         default: true
-    betterrtp.version:
+    simprtp.version:
         description: See which version is running
-    betterrtp.world:
+    simprtp.world:
         description: Use world command
-    betterrtp.player:
+    simprtp.player:
         description: RTP another player
-    betterrtp.biome:
+    simprtp.biome:
         description: RTP to specific biomes
-    betterrtp.location:
+    simprtp.location:
         description: RTP using a specific location
-    betterrtp.group.*:
+    simprtp.group.*:
         description: Use a permission group to rtp with different restrictions
-    betterrtp.sign:
+    simprtp.sign:
         description: Ability to create an RTP sign
-    betterrtp.bypass.cooldown:
+    simprtp.bypass.cooldown:
         description: Bypass cooldowns
-    betterrtp.bypass.delay:
+    simprtp.bypass.delay:
         description: Bypass delays
-    betterrtp.bypass.economy:
+    simprtp.bypass.economy:
         description: Bypass economy
-    betterrtp.bypass.hunger:
+    simprtp.bypass.hunger:
         description: Bypass hunger
-    betterrtp.reload:
+    simprtp.reload:
         description: Reload the config
         default: op
-    betterrtp.updater:
+    simprtp.updater:
         description: Get notification on new updates
         default: op
-    betterrtp.info:
+    simprtp.info:
         description: View info about all worlds rtp will work in
         default: op
-    betterrtp.test:
+    simprtp.test:
         description: While debugger enabled, be able to test particles, potion effects and sounds
         default: op
-    betterrtp.edit:
+    simprtp.edit:
         description: Edit a custom/default world rtp center/radius
         default: op

@@ -20,7 +20,7 @@ public class Updater {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 updatedVersion = reader.readLine();
             } catch (Exception ex) {
-                Bukkit.getConsoleSender().sendMessage("[BetterRTP] Failed to check for an update on spigot");
+                Bukkit.getConsoleSender().sendMessage("[SimpRTP] Failed to check for an update on spigot");
                 updatedVersion = pl.getDescription().getVersion();
             }
         });
