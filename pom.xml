@@ -41,6 +41,13 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
         </resources>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>

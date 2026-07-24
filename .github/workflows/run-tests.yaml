@@ -193,7 +193,9 @@ jobs:
           EOF
 
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release edit "$tag" --title "$title" --notes-file release-notes.md --latest
+            git tag --force "$tag" "$GITHUB_SHA"
+            git push --force origin "refs/tags/$tag"
+            gh release edit "$tag" --target "$GITHUB_SHA" --title "$title" --notes-file release-notes.md --latest
           else
             gh release create "$tag" --target "$GITHUB_SHA" --title "$title" --notes-file release-notes.md --latest
           fi
