@@ -15,6 +15,7 @@ public enum PermissionNode implements PermissionCheck {
     RELOAD("reload"),
     SETTINGS("settings"),
     INFO("info"),
+    LANGUAGE("language"),
     UPDATER("updater"),
     RTP_OTHER("player"),
     BIOME("biome"),

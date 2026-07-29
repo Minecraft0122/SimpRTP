@@ -104,8 +104,8 @@ public class CmdLocation implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.LOCATION.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.LOCATION.get(sender);
     }
 
     @Override public boolean enabled() {

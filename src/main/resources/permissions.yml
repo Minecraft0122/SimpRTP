@@ -7,14 +7,15 @@ permissions:
             simprtp.bypass.*: true
             simprtp.player: true
             simprtp.reload: true
+            simprtp.language: true
             simprtp.updater: true
             simprtp.group.*: true
     simprtp.world:
-        description: Ability to use the world command
+        description: 使用世界随机传送指令
     simprtp.world.*:
-        description: RTP in all enabled worlds
+        description: 在所有已启用的世界中随机传送
     simprtp.world.<world>:
-        description: RTP in world named world
+        description: 在指定世界中随机传送
     simprtp.bypass.*:
         children:
             simprtp.bypass.cooldown: true
@@ -22,40 +23,43 @@ permissions:
             simprtp.bypass.economy: true
             simprtp.bypass.hunger: true
     simprtp.use:
-        description: Use RTP command
+        description: 使用随机传送指令
+        default: true
+    simprtp.language:
+        description: 选择个人 SimpRTP 消息语言
         default: true
     simprtp.player:
-        description: RTP another player
+        description: 随机传送其他玩家
     simprtp.biome:
-        description: RTP to specific biomes
+        description: 随机传送到指定生物群系
     simprtp.sign:
-        description: Ability to create an RTP sign
-    #Locations
+        description: 创建随机传送指令牌
+    # 位置
     simprtp.location:
-        description: Ability to use the location command
+        description: 使用位置随机传送指令
     simprtp.location.*:
-        description: Ability to use all locations if permissions are enabled in locations.yml
+        description: 在 locations.yml 启用权限检查时使用所有位置
         default: op
-    #Bypasses
+    # 绕过限制
     simprtp.bypass.cooldown:
-        description: Bypass cooldowns
+        description: 绕过冷却时间
     simprtp.bypass.delay:
-        description: Bypass delays
+        description: 绕过传送等待
     simprtp.bypass.economy:
-        description: Bypass economy
+        description: 绕过经济收费
     simprtp.bypass.hunger:
-        description: Bypass hunger
-    #Reload
+        description: 绕过饥饿值检查
+    # 重载
     simprtp.reload:
-        description: Reload the config
+        description: 重载插件配置
         default: op
     simprtp.updater:
-        description: Get notification on new updates
+        description: 接收插件更新提示
         default: op
     simprtp.test:
-        description: While debugger enabled, be able to test particles, potion effects and sounds
+        description: 在调试模式下测试粒子、药水和声音效果
         default: op
-    #Permission Groups
+    # 权限组
     simprtp.group.*:
-        description: Allow access to all permission groups
+        description: 使用所有随机传送权限组
         default: op

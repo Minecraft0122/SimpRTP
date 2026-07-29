@@ -35,7 +35,7 @@ public class CmdSettings implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.SETTINGS.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.SETTINGS.get(sender);
     }
 }

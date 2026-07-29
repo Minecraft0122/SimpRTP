@@ -1,5 +1,5 @@
-#Locations where rtp will center upon
-#Format:
+# 随机传送中心位置
+# 格式：
 # - LOCATION_NAME:
 #     World: world
 #     CenterX: 100
@@ -10,20 +10,20 @@
 #     MinY: 0
 #     MaxY: 320
 
-Enabled: false #enable the locations feature
-RequirePermission: false #Require players to have `simprtp.location.<world_name>`
-UseLocationIfAvailable: true #Will choose a location upon `/rtp` if location(s) is available in the world
-UseLocationsInSameWorld: true #Will only choose locations in same world rtp'ing in
-# If UseLocationsInSameWorld is set to true, use `simprtp.bypass.location` to allow rtp'ing to locations in other worlds
+Enabled: false # 是否启用位置功能
+RequirePermission: false # 是否要求玩家拥有 simprtp.location.<位置名称> 权限
+UseLocationIfAvailable: true # 当前世界存在可用位置时，执行 /rtp 是否优先使用位置
+UseLocationsInSameWorld: true # 是否只能使用目标世界中的位置
+# 启用 UseLocationsInSameWorld 后，simprtp.bypass.location 权限可允许跨世界使用位置
 
 Locations:
   - main_loc:
       World: world_name
       CenterX: 100
       CenterZ: 150
-      MaxRadius: 100 #optional
-      MinRadius: 5 #optional
-      Shape: square #optional
-      MinY: 0 #optional
-      MaxY: 320 #optional
-      Cooldown: 300 #optional
+      MaxRadius: 100 # 可选
+      MinRadius: 5 # 可选
+      Shape: square # 可选
+      MinY: 0 # 可选
+      MaxY: 320 # 可选
+      Cooldown: 300 # 可选

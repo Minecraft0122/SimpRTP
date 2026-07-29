@@ -45,23 +45,23 @@ public enum MessagesCore {
     private static final String pre = "Messages.";
 
     public void send(CommandSender sendi) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section));
+        Message_RTP.sms(sendi, Message_RTP.getLang(sendi).getString(pre + section));
     }
 
     public void send(CommandSender sendi, Object placeholderInfo) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section), placeholderInfo);
+        Message_RTP.sms(sendi, Message_RTP.getLang(sendi).getString(pre + section), placeholderInfo);
     }
 
     public void send(CommandSender sendi, List<Object> placeholderInfo) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(pre + section), placeholderInfo);
+        Message_RTP.sms(sendi, Message_RTP.getLang(sendi).getString(pre + section), placeholderInfo);
     }
 
     public String get(CommandSender p, Object placeholderInfo) {
-        return Message.placeholder(p, Message_RTP.getLang().getString(pre + section), placeholderInfo);
+        return Message.placeholder(p, Message_RTP.getLang(p).getString(pre + section), placeholderInfo);
     }
 
     public void send(CommandSender sendi, HashMap<String, String> placeholder_values) {
-        String msg = Message_RTP.getLang().getString(pre + section);
+        String msg = Message_RTP.getLang(sendi).getString(pre + section);
         for (String ph : placeholder_values.values())
             msg = msg.replace(ph, placeholder_values.get(ph));
         Message_RTP.sms(sendi, msg);

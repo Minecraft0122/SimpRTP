@@ -1,6 +1,7 @@
 package me.SuperRonanCraft.BetterRTP.references.messages;
 
 import me.SuperRonanCraft.BetterRTP.references.file.FileData;
+import org.bukkit.command.CommandSender;
 
 public enum MessagesHelp implements MessageData {
 
@@ -10,6 +11,7 @@ public enum MessagesHelp implements MessageData {
     EDIT("Edit"),
     HELP("Help"),
     INFO("Info"),
+    LANGUAGE("Language"),
     PLAYER("Player"),
     RELOAD("Reload"),
     SETTINGS("Settings"),
@@ -33,6 +35,11 @@ public enum MessagesHelp implements MessageData {
     @Override
     public FileData file() {
         return Message_RTP.getLang();
+    }
+
+    @Override
+    public FileData file(CommandSender sender) {
+        return Message_RTP.getLang(sender);
     }
 
     @Override

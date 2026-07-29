@@ -29,6 +29,13 @@ Messages:
   NotExist: '&cLooks like the world &7%world% &cdoesn''t exist!'
   Already: '&cWhoops! &7Looks like you are already rtp''ing, have some patience!'
   Sign: '&7Command sign has been created! &7Command is... ''&f/rtp %command%&7'''
+  Language:
+    Current: '&aCurrent language: &f%language% &7(preference: %preference%)'
+    Available: '&7Available languages: &f%languages%&7. You can also use &fauto &7or &fdefault&7.'
+    Changed: '&aYour SimpRTP language is now &f%language%&a.'
+    Reset: '&aYour SimpRTP language now follows the server default (&f%language%&a).'
+    Invalid: '&cUnknown language &f%language%&c.'
+    PlayersOnly: '&cOnly players can choose a personal language.'
   Edit:
     Error: '&cError! &7Invalid input provided!'
     Set: '&bSuccess! &7%type% set to %value%'
@@ -41,6 +48,7 @@ Help:
   Edit: ' &7- &e/%command% edit <default/world> [args...] &7- Edit some plugin settings'
   Help: ' &7- &e/%command% help &7- Shows help list'
   Info: ' &7- &e/%command% info [world/particles/shapes/potion_effects] &7- View specific information about plugin parameters'
+  Language: ' &7- &e/%command% language [language/auto/default] &7- Choose your message language'
   Player: ' &7- &e/%command% player <player> [world] [biome1, biome2...] &7- Randomly teleport another player'
   Reload: ' &7- &e/%command% reload &7- Reloads the plugin'
   Settings: ' &7- &e/%command% settings &7- Pull up a gui and edit some settings'
@@ -54,6 +62,7 @@ Usage:
   World: '&cUsage&7: /%command% world <world> [biome1, biome2...]'
   Biome: '&cUsage&7: /%command% biome <biome1, biome2...>'
   Location: '&cUsage&7: /%command% location <location_name>'
+  Language: '&cUsage&7: /%command% language [language/auto/default]'
   Edit:
     Base: '&cUsage&7: /%command% edit <default/world> [args...]'
     Default: '&cUsage&7: /%command% edit default <max/min/useworldborder/center> <value>'

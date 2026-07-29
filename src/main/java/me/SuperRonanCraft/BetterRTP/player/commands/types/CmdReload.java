@@ -29,7 +29,7 @@ public class CmdReload implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.RELOAD.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.RELOAD.get(sender);
     }
 }

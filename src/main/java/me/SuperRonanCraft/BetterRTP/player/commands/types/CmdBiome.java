@@ -42,7 +42,7 @@ public class CmdBiome implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.BIOME.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.BIOME.get(sender);
     }
 }

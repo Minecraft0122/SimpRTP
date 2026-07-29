@@ -6,6 +6,17 @@
 All language files are located [here](src/main/resources/lang)
 feel free to fork one of the language files and help translate!
 
+## 玩家自选语言
+
+SimpRTP 默认使用简体中文。玩家可使用以下指令单独选择消息语言，选择结果会持久保存：
+
+- `/rtp language`：查看当前语言及可用语言
+- `/rtp language <语言代码>`：选择语言，例如 `chs`、`cht`、`en`
+- `/rtp language auto`：跟随 Minecraft 客户端语言
+- `/rtp language default`：恢复服务器默认语言
+
+所需权限为 `simprtp.language`，默认向所有玩家开放。管理员仍可通过 `config.yml` 中的 `Language-File` 设置服务器默认语言。
+
 ## Libraries
 SimpRTP uses and is compiled with the following libraries:
 

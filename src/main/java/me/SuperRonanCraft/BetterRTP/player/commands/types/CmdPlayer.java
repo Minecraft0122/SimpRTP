@@ -116,7 +116,7 @@ public class CmdPlayer implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.PLAYER.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.PLAYER.get(sender);
     }
 }

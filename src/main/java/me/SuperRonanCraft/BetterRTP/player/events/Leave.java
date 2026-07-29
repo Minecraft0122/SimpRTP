@@ -9,6 +9,7 @@ class Leave {
 
     static void event(PlayerQuitEvent e) {
         Player p = e.getPlayer();
+        BetterRTP.getInstance().getFiles().getLang().unloadPlayer(p);
         BetterRTP.getInstance().getPInfo().unload(p);
         HelperPlayer.unload(p);
     }

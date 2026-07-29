@@ -7,6 +7,7 @@ public enum RTPCommandType {
     EDIT(new CmdEdit()),
     HELP(new CmdHelp()),
     INFO(new CmdInfo()),
+    LANGUAGE(new CmdLanguage()),
     LOCATION(new CmdLocation()),
     PLAYER(new CmdPlayer()),
     PLAYERSUDO(new CmdPlayerSudo()),

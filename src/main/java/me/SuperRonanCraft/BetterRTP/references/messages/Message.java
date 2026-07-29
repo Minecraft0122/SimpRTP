@@ -20,22 +20,26 @@ public interface Message {
 
     FileData lang();
 
+    default FileData lang(CommandSender sender) {
+        return lang();
+    }
+
     static void sms(Message messenger, CommandSender sendi, String msg) {
         if (!msg.isEmpty())
             AsyncHandler.syncAtSender(sendi, () ->
-                    sendi.sendMessage(placeholder(sendi, getPrefix(messenger) + msg)));
+                    sendi.sendMessage(placeholder(sendi, getPrefix(messenger, sendi) + msg)));
     }
 
     static void sms(Message messenger, CommandSender sendi, String msg, Object placeholderInfo) {
         if (!msg.isEmpty())
             AsyncHandler.syncAtSender(sendi, () ->
-                    sendi.sendMessage(Objects.requireNonNull(placeholder(sendi, getPrefix(messenger) + msg, placeholderInfo))));
+                    sendi.sendMessage(Objects.requireNonNull(placeholder(sendi, getPrefix(messenger, sendi) + msg, placeholderInfo))));
     }
 
     static void sms(Message messenger, CommandSender sendi, String msg, List<Object> placeholderInfo) {
         if (!msg.isEmpty())
             AsyncHandler.syncAtSender(sendi, () ->
-                    sendi.sendMessage(placeholder(sendi, getPrefix(messenger) + msg, placeholderInfo)));
+                    sendi.sendMessage(placeholder(sendi, getPrefix(messenger, sendi) + msg, placeholderInfo)));
     }
 
     static void sms(CommandSender sendi, List<String> msg, Object placeholderInfo) {
@@ -71,6 +75,10 @@ public interface Message {
 
     static String getPrefix(Message messenger) {
         return messenger.lang().getString("Messages.Prefix");
+    }
+
+    static String getPrefix(Message messenger, CommandSender sender) {
+        return messenger.lang(sender).getString("Messages.Prefix");
     }
 
     /**

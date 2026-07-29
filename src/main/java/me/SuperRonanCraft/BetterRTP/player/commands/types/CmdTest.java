@@ -42,8 +42,8 @@ public class CmdTest implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.TEST.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.TEST.get(sender);
     }
 
     @Override

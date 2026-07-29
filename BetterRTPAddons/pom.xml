@@ -7,7 +7,7 @@
     <groupId>me.SuperRonanCraft</groupId>
     <artifactId>SimpRTPAddons</artifactId>
     <packaging>jar</packaging>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 
     <properties>
         <maven.compiler.release>25</maven.compiler.release>
@@ -103,7 +103,7 @@
         <dependency>
             <groupId>me.SuperRonanCraft</groupId>
             <artifactId>SimpRTP</artifactId>
-            <version>4.0.0</version>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
         <!-- ProtocolLib -->

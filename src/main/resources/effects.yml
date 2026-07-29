@@ -1,47 +1,47 @@
 Sounds:
   Enabled: true
   ProtocolLibSound: false
-  ## More sounds at https://www.spigotmc.org/wiki/cc-sounds-list/
+  ## 声音名称参考：https://www.spigotmc.org/wiki/cc-sounds-list/
   Delay: 'entity_tnt_primed'
   Success: 'entity_generic_explode'
 Titles:
-  Enabled: true # Enable the titles effect feature
-  ## All support %player% %x% %y% and %z% placeholders
-  NoDelay: #Only triggers when there is no delay
-    Title: '&6Teleporting...'
-    Subtitle: '&8please wait'
+  Enabled: true # 是否启用标题效果
+  ## 以下文本均支持 %player%、%x%、%y% 和 %z% 占位符
+  NoDelay: # 仅在没有传送等待时间时触发
+    Title: '&6正在传送……'
+    Subtitle: '&8请稍候'
     SendMessage: true
   Teleport:
-    Title: '&6Teleported!'
+    Title: '&6传送成功！'
     Subtitle: '&fx=%x% y=%y% z=%z%'
-    SendMessage: true # Allow the teleport success message in chat
+    SendMessage: true # 是否同时在聊天栏发送传送成功消息
   Delay:
     Title: ''
-    Subtitle: '&fTeleporting in %time% seconds...'
-    SendMessage: true # Allow the teleport delay message in chat
+    Subtitle: '&f将在 %time% 秒后传送……'
+    SendMessage: true # 是否同时在聊天栏发送等待消息
   Cancelled:
-    Title: '&eYou moved...'
-    Subtitle: '&cRtp was cancelled!'
-    SendMessage: true # Allow the cancelled message in chat too
+    Title: '&e你移动了……'
+    Subtitle: '&c随机传送已取消！'
+    SendMessage: true # 是否同时在聊天栏发送取消消息
   Loading:
     Title: ''
-    Subtitle: '&7loading chunks... please wait'
-    SendMessage: true # Allow the loading message in chat
+    Subtitle: '&7正在加载区块，请稍候……'
+    SendMessage: true # 是否同时在聊天栏发送加载消息
   Failed:
     Title: ''
-    Subtitle: '&cFailed! No safe spots located'
+    Subtitle: '&c传送失败！未找到安全位置'
     SendMessage: true
-Particles: #Use `rtp info particles` for a list of particles
+Particles: # 使用 /rtp info particles 查看粒子列表
   Enabled: true
-  Type: #list of particle types at https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java
+  Type: # 粒子类型列表：https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java
     - 'EXPLOSION_NORMAL'
     - 'CRIT'
-  Shape: 'EXPLODE' #Types available are "Scan, Teleport and Explode", or use `/rtp info shapes` for a list of shapes
-Invincible: #Amount of time a player should not take damage for
+  Shape: 'EXPLODE' # 可用形状：Scan、Teleport、Explode；使用 /rtp info shapes 查看列表
+Invincible: # 传送后无敌保护
   Enabled: true
   Seconds: 5
-Potions: #Use `/rtp info potion_effects` for a list of effects
+Potions: # 使用 /rtp info potion_effects 查看药水效果列表
   Enabled: true
-  Types: #Format <potion_name>:[duration_ticks]:[amplifier] #Default duration=60, amplifier=1
+  Types: # 格式：<药水名称>:[持续 tick]:[等级]；默认持续 60 tick、等级 1
     - 'Blindness:60:1'
     - 'Invisibility:60:1'

@@ -31,7 +31,7 @@ api-version: '26.1'
 commands:
     simprtp:
         aliases: [betterrtp, brtp, rtp, randomtp, wild, wildtp]
-        description: Randomly teleport to a location
+        description: 随机传送到安全位置
 
 permissions:
     simprtp.*:
@@ -43,51 +43,55 @@ permissions:
             simprtp.reload: true
             simprtp.updater: true
             simprtp.biome: true
+            simprtp.language: true
             simprtp.version: true
     simprtp.world.*:
-        description: RTP in all enabled worlds
+        description: 可在所有已启用的世界中随机传送
     simprtp.bypass.*:
             children:
                 simprtp.bypass.cooldown: true
                 simprtp.bypass.delay: true
                 simprtp.bypass.economy: true
     simprtp.use:
-        description: Use RTP command
+        description: 使用随机传送指令
+        default: true
+    simprtp.language:
+        description: 选择个人 SimpRTP 消息语言
         default: true
     simprtp.version:
-        description: See which version is running
+        description: 查看当前插件版本
     simprtp.world:
-        description: Use world command
+        description: 使用世界随机传送指令
     simprtp.player:
-        description: RTP another player
+        description: 随机传送其他玩家
     simprtp.biome:
-        description: RTP to specific biomes
+        description: 随机传送到指定生物群系
     simprtp.location:
-        description: RTP using a specific location
+        description: 使用指定位置随机传送
     simprtp.group.*:
-        description: Use a permission group to rtp with different restrictions
+        description: 使用权限组专用的随机传送参数
     simprtp.sign:
-        description: Ability to create an RTP sign
+        description: 创建随机传送指令牌
     simprtp.bypass.cooldown:
-        description: Bypass cooldowns
+        description: 绕过冷却时间
     simprtp.bypass.delay:
-        description: Bypass delays
+        description: 绕过传送等待
     simprtp.bypass.economy:
-        description: Bypass economy
+        description: 绕过经济收费
     simprtp.bypass.hunger:
-        description: Bypass hunger
+        description: 绕过饥饿值检查
     simprtp.reload:
-        description: Reload the config
+        description: 重载插件配置
         default: op
     simprtp.updater:
-        description: Get notification on new updates
+        description: 接收插件更新提示
         default: op
     simprtp.info:
-        description: View info about all worlds rtp will work in
+        description: 查看可使用随机传送的世界信息
         default: op
     simprtp.test:
-        description: While debugger enabled, be able to test particles, potion effects and sounds
+        description: 在调试模式下测试粒子、药水和声音效果
         default: op
     simprtp.edit:
-        description: Edit a custom/default world rtp center/radius
+        description: 编辑默认或自定义世界的传送中心和半径
         default: op

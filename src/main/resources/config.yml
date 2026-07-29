@@ -1,91 +1,91 @@
-# SimpRTP plugin by SuperRonanCraft! (Join my Public Server at ronanplugins.com) #
-# Need help? go to https://ronanplugins.com/discord! #
+# SimpRTP 插件，作者 SuperRonanCraft
+# 如需帮助，请访问：https://ronanplugins.com/discord
 
-Language-File: 'en.yml'
+# 服务器默认语言。玩家可使用 /rtp language 单独选择语言。
+Language-File: 'chs.yml'
 
 Settings:
   Respect:
-    ## Respect MinePlots plots (https://builtbybit.com/resources/mineplots.21646/)
+    ## 是否避开 MinePlots 地块：https://builtbybit.com/resources/mineplots.21646/
     MinePlots: false
-    ## Respect WorldGuard areas (https://dev.bukkit.org/projects/worldguard)
+    ## 是否避开 WorldGuard 区域：https://dev.bukkit.org/projects/worldguard
     WorldGuard: false
-    ## Respect GriefPrevention areas (https://www.spigotmc.org/resources/griefprevention.1884/)
+    ## 是否避开 GriefPrevention 领地：https://www.spigotmc.org/resources/griefprevention.1884/
     GriefPrevention: false
-    ## Respect Towny areas (https://www.spigotmc.org/resources/towny.72694/)
+    ## 是否避开 Towny 城镇区域：https://www.spigotmc.org/resources/towny.72694/
     Towny: false
-    ## Respect RedProtect areas (https://www.spigotmc.org/resources/redprotect.15841/)
+    ## 是否避开 RedProtect 区域：https://www.spigotmc.org/resources/redprotect.15841/
     RedProtect: false
-    ## Respect FactionsUUID areas (https://www.spigotmc.org/resources/factionsuuid.1035/)
+    ## 是否避开 FactionsUUID 领地：https://www.spigotmc.org/resources/factionsuuid.1035/
     FactionsUUID: false
-    ## Respect Lands areas (https://www.spigotmc.org/resources/lands.53313/)
+    ## 是否避开 Lands 领地：https://www.spigotmc.org/resources/lands.53313/
     Lands: false
-    ## Respect Residence areas (https://www.spigotmc.org/resources/residence.11480/)
+    ## 是否避开 Residence 领地：https://www.spigotmc.org/resources/residence.11480/
     Residence: false
-    ## Respect KingdomsX areas (https://www.spigotmc.org/resources/kingdomsx.77670/)
+    ## 是否避开 KingdomsX 领地：https://www.spigotmc.org/resources/kingdomsx.77670/
     KingdomsX: false
-    ## Respect hClaims areas (https://www.spigotmc.org/resources/hclaims.90540/)
+    ## 是否避开 hClaims 领地：https://www.spigotmc.org/resources/hclaims.90540/
     hClaims: false
-    ## Respect GriefDefender areas (https://www.spigotmc.org/resources/griefdefender.68900/)
+    ## 是否避开 GriefDefender 领地：https://www.spigotmc.org/resources/griefdefender.68900/
     GriefDefender: false
-    ## Respect UltimateClaims areas (https://songoda.com/marketplace/product/ultimateclaims-the-ultimate-claiming-plugin.65)
+    ## 是否避开 UltimateClaims 领地：https://songoda.com/marketplace/product/ultimateclaims-the-ultimate-claiming-plugin.65
     UltimateClaims: false
-    ## Respect Pueblos regions (https://www.spigotmc.org/resources/pueblos.91255/) (My Favorite :D)
+    ## 是否避开 Pueblos 区域：https://www.spigotmc.org/resources/pueblos.91255/
     Pueblos: false
-    ## Respect SaberFactions areas (https://www.spigotmc.org/resources/saberfactions.69771/) (Added in 3.4.5)
+    ## 是否避开 SaberFactions 领地：https://www.spigotmc.org/resources/saberfactions.69771/
     SaberFactions: false
-    ## Respect HuskClaims areas (https://www.spigotmc.org/resources/huskclaims-1-17-1-21-modern-golden-shovel-land-claiming-fully-cross-server-compatible.114467/) (Added in 1.5.2)
+    ## 是否避开 HuskClaims 领地：https://www.spigotmc.org/resources/huskclaims.114467/
     HuskClaims: false
-    ## Respect HuskTowns areas (https://www.spigotmc.org/resources/husktowns.92672/) (Added in 3.4.5)
+    ## 是否避开 HuskTowns 城镇区域：https://www.spigotmc.org/resources/husktowns.92672/
     HuskTowns: false
-    ## Respect FactionsBridge compatible claims (https://www.spigotmc.org/resources/factionsbridge.89716/) (Added in 3.6.9)
+    ## 是否避开与 FactionsBridge 兼容的领地：https://www.spigotmc.org/resources/factionsbridge.89716/
     FactionsBridge: false
-    ## Respect CrashClaim claims (https://www.spigotmc.org/resources/crashclaim-claiming-plugin.94037/) (Added in 3.6.9)
+    ## 是否避开 CrashClaim 领地：https://www.spigotmc.org/resources/crashclaim.94037/
     CrashClaim: false
 
-  ## Output to console some debugging info
+  ## 是否在控制台输出调试信息
   Debugger: false
-  ## Amount of chunks to preload around a safe location
+  ## 找到安全位置后，预加载其周围多少个区块
   PreloadRadius: 5
-  ## Maximum amount of tries before SimpRTP gives up and sends a NotSafeMessage #
+  ## 找不到安全位置时的最大尝试次数
   MaxAttempts: 32
-  RtpOnFirstJoin: # Will execute as console to override delays
-    Enabled: false # Make the player rtp when joining the server for the first time
-    World: 'world' # World to first rtp in
-    SetAsRespawn: false # Save this first rtp as players new spawn point
+  RtpOnFirstJoin:
+    Enabled: false # 玩家首次加入服务器时是否自动随机传送
+    World: 'world' # 首次随机传送的目标世界
+    SetAsRespawn: false # 是否将首次传送位置设为玩家重生点
   Cooldown:
-    Enabled: true # Enabled or disabled cooldown timer
-    LockAfter: 0 # Lock the player in an infinite cooldown after # rtp's (0 to disable)
-    Time: 600 # in SECONDS
-    PerWorld: false #Cooldowns handled for each world? If disabled, player cannot rtp in another world until original cooldown has passed
-  ## Time between command and actually rtp'ing, time is in SECONDS. Set to "0" to disable delay timer #
+    Enabled: true # 是否启用冷却时间
+    LockAfter: 0 # 随机传送达到此次数后永久锁定；设为 0 禁用
+    Time: 600 # 冷却时间，单位：秒
+    PerWorld: false # 是否为每个世界分别计算冷却
   Delay:
-    Enabled: true
-    Time: 5
-    CancelOnMove: true
+    Enabled: true # 是否启用传送前等待
+    Time: 5 # 等待时间，单位：秒；设为 0 禁用
+    CancelOnMove: true # 等待期间移动是否取消传送
   Queue:
-    Enabled: true #Allows betterrtp to automatically queue up safe rtp locations prior to players executing `/rtp`
-  DisableUpdater: false
+    Enabled: true # 是否预先搜索安全位置，以加快 /rtp 执行速度
+  DisableUpdater: false # 是否禁用更新检查
   Logger:
-    Enabled: true #Log all things rtp related to the log.log file
-    LogToConsole: false
-    Format: 'yyyy-MM-dd HH:mm:ss'
+    Enabled: true # 是否将随机传送事件写入 log.log
+    LogToConsole: false # 是否同时输出到控制台
+    Format: 'yyyy-MM-dd HH:mm:ss' # 日志时间格式
 
+# 未单独配置的世界使用以下默认设置
 Default:
-  UseWorldBorder: false
-  ## "Biomes: []" means all biomes are allowed! #
-  ## Biomes are optional, more biomes at https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/Biome.html #
+  UseWorldBorder: false # 是否使用原版世界边界作为传送范围
+  ## 留空 [] 表示允许所有生物群系
   Biomes: []
-  MaxRadius: 1000
-  MinRadius: 10
-  ## If "UseWorldBorder" is set to true above, Center X and Z will be ignored! #
+  MaxRadius: 1000 # 最大半径
+  MinRadius: 10 # 最小半径
+  ## 启用 UseWorldBorder 后会忽略中心坐标
   CenterX: 0
   CenterZ: 0
-  Shape: 'square'
-  MaxY: 320
-  MinY: 0
-  RTPOnDeath: false
+  Shape: 'square' # 范围形状：square（方形）或 circle（圆形）
+  MaxY: 320 # 最大高度
+  MinY: 0 # 最小高度
+  RTPOnDeath: false # 玩家死亡时是否随机传送
 
-## Blocks SimpRTP will NOT teleport onto. More Blocks at: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html #
+## 不允许作为落脚点的方块。材质名称参考 Bukkit Material。
 BlacklistedBlocks:
   - stationary_water
   - stationary_lava
@@ -103,17 +103,17 @@ BlacklistedBlocks:
   - jungle_leaves
   - kelp
 
-## Worlds to NOT allow /rtp in, unless there is an override to another enabled world #
+## 禁止使用随机传送的世界；若配置了世界重定向则不受此限制
 DisabledWorlds:
   - prison
   - creative
 
-## Worlds you want to have a custom min/max and spawn center in #
-## [MaxRadius] and [MinRadius] MUST be positive! These cannot be equal to each other!
+## 为指定世界设置独立的范围、中心、价格和冷却等参数
+## MaxRadius 与 MinRadius 必须为正数，且不能相等
 CustomWorlds:
   - custom_world_1:
       UseWorldBorder: false
-      ## If UseWorldBorder is true, everything will be ignored EXCEPT "MinRadius"!
+      ## 启用世界边界后，仅 MinRadius 仍会生效
       MaxRadius: 1000
       MinRadius: 100
       CenterX: 0
@@ -129,36 +129,38 @@ CustomWorlds:
       CenterX: 123
       CenterZ: -123
       Price: 0
-      ## Biomes are optional, but useful! More biomes: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/block/Biome.html
+      ## 可选：限制允许传送到的生物群系
       Biomes:
         - 'desert'
         - 'forest'
       Shape: 'circle'
       RTPOnDeath: true
 
-## Override a world and rtp a player executing the command in one world, to another
+## 玩家在某世界执行 /rtp 时，将其重定向到另一个世界
 Overrides:
-  #FORMAT - <CURRENT WORLD>:<DESIRED WORLD>
+  # 格式：当前世界: 目标世界
   - master_world: 'world'
   - creative_world: 'world'
 
-WorldType: # Available types are NORMAL, NETHER
+## 指定世界类型。可用值：NORMAL、NETHER
+WorldType:
   - world: NORMAL
   - world_nether: NETHER
   - world_the_end: NORMAL
 
-PermissionGroup: #Player requires "simprtp.group.<group_name>" to trigger these configs
+## 权限组专用传送参数；玩家需拥有 simprtp.group.<组名>
+PermissionGroup:
   Enabled: false
   Groups:
-    - vip: # permission: simprtp.group.vip
-        - Build_World: #World named "Build_World"
-            Priority: 0 #Lower the more prioritized
+    - vip:
+        - Build_World:
+            Priority: 0 # 数值越小优先级越高
             MaxRadius: 10000
             MinRadius: 1000
             Price: 100
-            Cooldown: 500 #optional
+            Cooldown: 500 # 可选
         - Survival_World:
-            Priority: 10 #Higher the less prioritized
+            Priority: 10
             UseWorldBorder: false
             MaxRadius: 5000
             MinRadius: 1000
@@ -167,7 +169,7 @@ PermissionGroup: #Player requires "simprtp.group.<group_name>" to trigger these 
             Price: 10
             MaxY: 320
             MinY: 0
-    - vip2: # permission: simprtp.group.vip2
+    - vip2:
         - Build_World:
             MaxRadius: 25000
             MinRadius: 10000

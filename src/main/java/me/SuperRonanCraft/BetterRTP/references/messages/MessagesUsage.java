@@ -9,6 +9,7 @@ public enum MessagesUsage implements MessageData {
     WORLD("World"),
     BIOME("Biome"),
     LOCATION("Location"),
+    LANGUAGE("Language"),
     //Edit
     EDIT_LOCATION("Edit.Location"),
     EDIT_BASE("Edit.Base"),
@@ -27,7 +28,7 @@ public enum MessagesUsage implements MessageData {
     }
 
     public void send(CommandSender sendi, Object placeholderInfo) {
-        Message_RTP.sms(sendi, Message_RTP.getLang().getString(prefix() + section), placeholderInfo);
+        Message_RTP.sms(sendi, Message_RTP.getLang(sendi).getString(prefix() + section), placeholderInfo);
     }
 
     @Override
@@ -43,5 +44,10 @@ public enum MessagesUsage implements MessageData {
     @Override
     public FileData file() {
         return Message_RTP.getLang();
+    }
+
+    @Override
+    public FileData file(CommandSender sender) {
+        return Message_RTP.getLang(sender);
     }
 }

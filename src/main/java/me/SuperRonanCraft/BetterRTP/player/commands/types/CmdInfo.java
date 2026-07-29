@@ -96,8 +96,8 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.INFO.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.INFO.get(sender);
     }
 
     enum CmdInfoSub { //Sub commands, future expansions

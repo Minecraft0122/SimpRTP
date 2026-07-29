@@ -63,7 +63,7 @@ public class CmdWorld implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.WORLD.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.WORLD.get(sender);
     }
 }

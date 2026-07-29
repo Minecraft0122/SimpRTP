@@ -14,9 +14,18 @@ public class Message_RTP implements Message {
         return BetterRTP.getInstance().getFiles().getLang();
     }
 
+    public static FileData getLang(CommandSender sender) {
+        return BetterRTP.getInstance().getFiles().getLang().getLanguage(sender);
+    }
+
     @Override
     public FileData lang() {
         return getLang();
+    }
+
+    @Override
+    public FileData lang(CommandSender sender) {
+        return getLang(sender);
     }
 
     public static void sms(CommandSender sendi, String msg) {
@@ -37,5 +46,9 @@ public class Message_RTP implements Message {
 
     public static String getPrefix() {
         return Message.getPrefix(Message_RTP.msg);
+    }
+
+    public static String getPrefix(CommandSender sender) {
+        return Message.getPrefix(Message_RTP.msg, sender);
     }
 }

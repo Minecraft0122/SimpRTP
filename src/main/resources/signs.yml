@@ -1,3 +1,3 @@
 Settings:
-  Enabled: false
+  Enabled: false # 是否启用随机传送指令牌
   Title: "[RTP]"

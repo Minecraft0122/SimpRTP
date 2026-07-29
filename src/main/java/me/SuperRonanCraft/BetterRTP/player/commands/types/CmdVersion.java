@@ -30,7 +30,7 @@ public class CmdVersion implements RTPCommand, RTPCommandHelpable {
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.VERSION.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.VERSION.get(sender);
     }
 }

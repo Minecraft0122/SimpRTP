@@ -35,6 +35,11 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
+    private void onLocaleChange(PlayerLocaleChangeEvent e) {
+        BetterRTP.getInstance().getFiles().getLang().updatePlayerLocale(e.getPlayer(), e.locale().toLanguageTag());
+    }
+
+    @EventHandler
     private void onInteract(PlayerInteractEvent e) {
         interact.event(e);
     }

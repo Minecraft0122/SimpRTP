@@ -304,8 +304,8 @@ public class CmdEdit implements RTPCommand, RTPCommandHelpable { //Edit a worlds
     }
 
     @Override
-    public String getHelp() {
-        return MessagesHelp.EDIT.get();
+    public String getHelp(CommandSender sender) {
+        return MessagesHelp.EDIT.get(sender);
     }
 
     public enum RTP_CMD_EDIT {
