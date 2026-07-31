@@ -1,9 +1,8 @@
 Sounds:
   Enabled: true
-  ProtocolLibSound: false
   ## 声音名称参考：https://www.spigotmc.org/wiki/cc-sounds-list/
-  Delay: 'entity_tnt_primed'
-  Success: 'entity_generic_explode'
+  Delay: 'minecraft:entity.tnt.primed'
+  Success: 'minecraft:entity.generic.explode'
 Titles:
   Enabled: true # 是否启用标题效果
   ## 以下文本均支持 %player%、%x%、%y% 和 %z% 占位符
@@ -31,16 +30,16 @@ Titles:
     Title: ''
     Subtitle: '&c传送失败！未找到安全位置'
     SendMessage: true
-Particles: # 使用 /rtp info particles 查看粒子列表
+Particles: # 使用 /srtp info particles 查看粒子列表
   Enabled: true
-  Type: # 粒子类型列表：https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java
-    - 'EXPLOSION_NORMAL'
+  Type: # 仅支持当前 Bukkit API 中无需附加数据的粒子类型
+    - 'EXPLOSION'
     - 'CRIT'
-  Shape: 'EXPLODE' # 可用形状：Scan、Teleport、Explode；使用 /rtp info shapes 查看列表
+  Shape: 'EXPLODE' # 可用形状：Scan、Teleport、Explode；使用 /srtp info shapes 查看列表
 Invincible: # 传送后无敌保护
   Enabled: true
   Seconds: 5
-Potions: # 使用 /rtp info potion_effects 查看药水效果列表
+Potions: # 使用 /srtp info potion_effects 查看药水效果列表
   Enabled: true
   Types: # 格式：<药水名称>:[持续 tick]:[等级]；默认持续 60 tick、等级 1
     - 'Blindness:60:1'

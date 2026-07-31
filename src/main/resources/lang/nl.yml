@@ -27,7 +27,7 @@ Messages:
   Moved: '&cJe bewoog! &7rtp werd geannuleerd!'
   NotExist: '&cHet lijkt wel of de wereld &7%world% &cniet bestaat!'
   Already: '&cWhoops! &7Het lijkt erop dat je al aan het rtp''en bent, heb nog wat geduld!'
-  Sign: '&7Command sign is gemaakt! &7Command is... ''&f/rtp %command%&7'''
+  Sign: '&7Command sign is gemaakt! &7Command is... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cFout! &7Ongeldige invoer gegeven!'
     Set: '&bSucces! &7%type% ingesteld op %value%'

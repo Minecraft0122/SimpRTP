@@ -4,9 +4,9 @@ import me.SuperRonanCraft.BetterRTP.player.rtp.RTP_TYPE;
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_CancelledEvent;
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_TeleportPostEvent;
 import me.SuperRonanCraft.BetterRTP.references.helpers.HelperRTP;
-import me.SuperRonanCraft.BetterRTP.references.messages.Message;
 import me.SuperRonanCraft.BetterRTPAddons.Main;
 import me.SuperRonanCraft.BetterRTPAddons.util.Files;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +25,8 @@ import java.util.Objects;
 
 public class MagicStickEvents implements Listener {
 
+    private static final LegacyComponentSerializer LEGACY_TEXT = LegacyComponentSerializer.legacyAmpersand();
+
     public ItemStack item;
     boolean take;
 
@@ -39,9 +41,8 @@ public class MagicStickEvents implements Listener {
         item = new ItemStack(mat);
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
-        meta.setDisplayName(Message.color(title));
-        meta.setLore(lore);
-        lore.forEach((str) -> lore.set(lore.indexOf(str), Message.color(str)));
+        meta.displayName(LEGACY_TEXT.deserialize(title));
+        meta.lore(lore.stream().map(LEGACY_TEXT::deserialize).toList());
         item.setItemMeta(meta);
 
         this.take = file.getBoolean("MagicStick.Take");

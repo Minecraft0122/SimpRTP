@@ -61,7 +61,7 @@ Commands:
 Parties:
   Enabled: true
 
-#Addon RTPMenu (Enable `/rtp` world select menu)
+#Addon RTPMenu (Enable `/srtp` world select menu)
 RTPMenu:
   Enabled: false
   AutoRefresh: 0 #0 means menu will not refresh! (in ticks)
@@ -77,7 +77,7 @@ RTPMenu:
       - ''
       - '&8Click to rtp in world!'
       - ''
-      - '&7Cooldown&8: &d%betterrtp_cooldown%'
+      - '&7Cooldown&8: &d%simprtp_cooldown%'
   - world_nether:
       Name: '&cNether'
       Item: 'netherrack'
@@ -86,4 +86,4 @@ RTPMenu:
       - ''
       - '&8Click to rtp in world!'
       - ''
-      - '&7Cooldown&8: &d%betterrtp_cooldown%'
+      - '&7Cooldown&8: &d%simprtp_cooldown%'

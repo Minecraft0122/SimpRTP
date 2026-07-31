@@ -2,6 +2,7 @@ package me.SuperRonanCraft.BetterRTP.references.invs.enums;
 
 import java.util.List;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,11 +12,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import me.SuperRonanCraft.BetterRTP.references.invs.RTP_INV_SETTINGS;
-import me.SuperRonanCraft.BetterRTP.references.messages.Message;
 import me.SuperRonanCraft.BetterRTP.references.player.HelperPlayer;
 import me.SuperRonanCraft.BetterRTP.references.player.playerdata.PlayerData;
 
 public interface RTPInventory_Defaults {
+
+    LegacyComponentSerializer LEGACY_TEXT = LegacyComponentSerializer.legacyAmpersand();
 
     void show(Player p);
 
@@ -27,9 +29,9 @@ public interface RTPInventory_Defaults {
         ItemMeta _meta = _stack.getItemMeta();
         if (_meta != null) {
             if (lore != null)
-                _meta.setLore(lore);
+                _meta.lore(lore.stream().map(LEGACY_TEXT::deserialize).toList());
             if (name != null)
-                _meta.setDisplayName(Message.color(name));
+                _meta.displayName(LEGACY_TEXT.deserialize(name));
         }
         _stack.setItemMeta(_meta);
         return _stack;
@@ -42,7 +44,6 @@ public interface RTPInventory_Defaults {
     }
 
     default Inventory createInv(int size, String title) {
-        title = Message.color(title);
-        return Bukkit.createInventory(null, size, title);
+        return Bukkit.createInventory(null, size, LEGACY_TEXT.deserialize(title));
     }
 }

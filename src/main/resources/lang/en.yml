@@ -28,7 +28,7 @@ Messages:
   Moved: '&cYou have moved! &7RTP was cancelled!'
   NotExist: '&cLooks like the world &7%world% &cdoesn''t exist!'
   Already: '&cWhoops! &7Looks like you are already rtp''ing, have some patience!'
-  Sign: '&7Command sign has been created! &7Command is... ''&f/rtp %command%&7'''
+  Sign: '&7Command sign has been created! &7Command is... ''&f/srtp %command%&7'''
   Language:
     Current: '&aCurrent language: &f%language% &7(preference: %preference%)'
     Available: '&7Available languages: &f%languages%&7. You can also use &fauto &7or &fdefault&7.'

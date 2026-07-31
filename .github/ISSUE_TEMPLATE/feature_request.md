@@ -5,7 +5,7 @@ about: Suggest an idea for this plugin
 ---
 
 **Plugin Version**:
-<!-- Use "/rtp version" to get the plugin version -->
+<!-- Use "/srtp version" to get the plugin version -->
 
 **Request**:
 <!-- A clear and concise description of what you would like to be added -->

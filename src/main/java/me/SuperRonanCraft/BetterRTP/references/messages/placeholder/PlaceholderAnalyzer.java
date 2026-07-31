@@ -64,11 +64,6 @@ public class PlaceholderAnalyzer {
             str = str.replaceAll(Placeholders.WORLD.name, info);
         if (str.contains(Placeholders.COOLDOWN.name))
             str = str.replaceAll(Placeholders.COOLDOWN.name, info);
-        if (str.contains(Placeholders.CURRENTDVERSION.name))
-            str = str.replaceAll(Placeholders.CURRENTDVERSION.name, info);
-
-        if (str.contains(Placeholders.NEWVERSION.name))
-            str = str.replaceAll(Placeholders.NEWVERSION.name, info);
         return str;
     }
     private static String location(String str, Location loc) {
@@ -118,7 +113,7 @@ public class PlaceholderAnalyzer {
 
     private static String biome(String str, Biome biome) {
         if (str.contains(Placeholders.BIOME.name))
-            str = str.replace(Placeholders.BIOME.name, biome.name());
+            str = str.replace(Placeholders.BIOME.name, biome.getKey().getKey());
         return str;
     }
 

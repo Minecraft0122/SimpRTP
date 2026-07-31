@@ -11,13 +11,7 @@ public interface PermissionCheck {
         return "simprtp.";
     }
 
-    static String getLegacyPrefix() {
-        return "betterrtp.";
-    }
-
     default boolean check(CommandSender sendi) {
-        if (isDev())
-            return sendi.getName().equalsIgnoreCase("SuperRonanCraft") || sendi.getName().equalsIgnoreCase("RonanCrafts");
         return BetterRTP.getInstance().getPerms().checkPerm(getNode(), sendi);
     }
 
@@ -48,8 +42,6 @@ public interface PermissionCheck {
     static boolean getPermissionGroup(CommandSender sendi, String group) {
         return check(sendi, getPrefix() + "group." + group);
     }
-
-    boolean isDev();
 
     String getNode();
 

@@ -13,8 +13,6 @@ import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_FailedEvent;
 import me.SuperRonanCraft.BetterRTP.references.customEvents.RTP_FindLocationEvent;
 import me.SuperRonanCraft.BetterRTP.references.helpers.HelperRTP_Check;
-import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueData;
-import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueHandler;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.RandomLocation;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldPlayer;
 import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
@@ -44,22 +42,16 @@ public class RTPPlayer {
             Bukkit.getServer().getPluginManager().callEvent(event);
             //Async Location finder
             if (event.isCancelled()) {
-                randomlyTeleport(sendi);
                 attempts++;
+                AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
                 return;
             }
             AsyncHandler.async(() -> {
                 Location loc;
                 if (event.getLocation() != null) // && WorldPlayer.checkIsValid(event.getLocation(), pWorld))
                     loc = event.getLocation();
-                else {
-                    QueueData queueData = QueueHandler.getRandomAsync(worldPlayer);
-                    //BetterRTP.getInstance().getLogger().warning("Center x " + worldPlayer.getCenterX());
-                    if (queueData != null)
-                        loc = queueData.getLocation();
-                    else
-                        loc = RandomLocation.generateLocation(worldPlayer);
-                }
+                else
+                    loc = RandomLocation.generateLocation(worldPlayer);
                 attempts++; //Add an attempt
                 if (loc == null) {
                     AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
@@ -85,10 +77,9 @@ public class RTPPlayer {
         tpLoc = RandomLocation.getSafeLocation(worldPlayer.getWorldtype(), worldPlayer.getWorld(), loc, worldPlayer.getMinY(), worldPlayer.getMaxY(), worldPlayer.getBiomes());
         //attemptedLocations.add(loc);
         //Valid location?
-        if (tpLoc != null && checkDepends(tpLoc)) {
+        if (tpLoc != null) {
             AsyncHandler.syncAtEntity(player, () -> teleport(sendi, tpLoc));
         } else {
-            QueueHandler.remove(loc);
             AsyncHandler.syncAtEntity(player, () -> randomlyTeleport(sendi));
         }
     }
@@ -116,14 +107,6 @@ public class RTPPlayer {
         getPl().getPInfo().getRtping().remove(p);
         //RTP Failed Event
         Bukkit.getServer().getPluginManager().callEvent(new RTP_FailedEvent(this));
-    }
-
-    /**
-     * @param loc Location to check
-     * @return True if the location is valid
-     */
-    public static boolean checkDepends(Location loc) {
-        return RTPPluginValidation.checkLocation(loc);
     }
 
     private BetterRTP getPl() {

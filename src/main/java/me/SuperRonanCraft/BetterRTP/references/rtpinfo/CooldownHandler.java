@@ -2,14 +2,15 @@ package me.SuperRonanCraft.BetterRTP.references.rtpinfo;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.annotation.Nullable;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
@@ -23,10 +24,10 @@ import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 
 public class CooldownHandler {
 
-    @Getter boolean enabled, loaded, cooldownByWorld;
+    @Getter private volatile boolean enabled, loaded, cooldownByWorld;
     @Getter private int defaultCooldownTime; //Global Cooldown timer
     private int lockedAfter; //Rtp's before being locked
-    private final List<Player> downloading = new CopyOnWriteArrayList<>();
+    private final Set<UUID> downloading = ConcurrentHashMap.newKeySet();
 
     public void load() {
         FileOther.FILETYPE config = FileOther.FILETYPE.CONFIG;
@@ -52,10 +53,11 @@ public class CooldownHandler {
                queueDownload();
                return;
             }
-            //Load any online players cooldowns (mostly after a reload)
-            for (Player p : Bukkit.getOnlinePlayers())
-                loadPlayer(p);
-            loaded = true;
+            AsyncHandler.sync(() -> {
+                for (Player p : Bukkit.getOnlinePlayers())
+                    loadPlayer(p);
+                loaded = true;
+            });
         }, 10L);
     }
 
@@ -128,6 +130,7 @@ public class CooldownHandler {
     }
 
     private void savePlayer(Player player, @Nullable World world, @Nullable CooldownData data, boolean remove) {
+        PlayerData playerData = getData(player);
         AsyncHandler.async(() -> {
                 if (world != null && data != null && getDatabaseWorlds() != null) { //Per World enabled?
                     if (!remove)
@@ -135,7 +138,7 @@ public class CooldownHandler {
                     else
                         getDatabaseWorlds().removePlayer(data.getUuid(), world);
                 }
-                DatabaseHandler.getPlayers().setData(getData(player));
+                DatabaseHandler.getPlayers().setData(playerData);
             });
     }
 
@@ -149,26 +152,29 @@ public class CooldownHandler {
             return;
         }
 
-        downloading.add(player);
+        UUID playerId = player.getUniqueId();
+        if (!downloading.add(playerId))
+            return;
+        List<World> worlds = cooldownByWorld ? List.copyOf(Bukkit.getWorlds()) : List.of();
 
-        try {
-            if (getDatabaseWorlds() != null) { //Per World enabled?
-                for (World world : Bukkit.getWorlds()) {
-                    //Cooldowns
-                    CooldownData cooldown = getDatabaseWorlds().getCooldown(player.getUniqueId(), world);
-                    if (cooldown != null)
-                        playerData.getCooldowns().put(world, cooldown);
+        AsyncHandler.async(() -> {
+            try {
+                if (getDatabaseWorlds() != null) { //Per World enabled?
+                    for (World world : worlds) {
+                        CooldownData cooldown = getDatabaseWorlds().getCooldown(playerId, world);
+                        if (cooldown != null)
+                            playerData.getCooldowns().put(world, cooldown);
+                    }
                 }
+                DatabaseHandler.getPlayers().setupData(playerData);
+            } finally {
+                downloading.remove(playerId);
             }
-            //Player Data
-            DatabaseHandler.getPlayers().setupData(playerData);
-        } finally {
-            downloading.remove(player);
-        }
+        });
     }
 
     public boolean loadedPlayer(Player player) {
-        return !downloading.contains(player);
+        return !downloading.contains(player.getUniqueId());
     }
 
     @Nullable

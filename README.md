@@ -10,19 +10,19 @@ feel free to fork one of the language files and help translate!
 
 SimpRTP 默认使用简体中文。玩家可使用以下指令单独选择消息语言，选择结果会持久保存：
 
-- `/rtp language`：查看当前语言及可用语言
-- `/rtp language <语言代码>`：选择语言，例如 `chs`、`cht`、`en`
-- `/rtp language auto`：跟随 Minecraft 客户端语言
-- `/rtp language default`：恢复服务器默认语言
+- `/srtp language`：查看当前语言及可用语言
+- `/srtp language <语言代码>`：选择语言，例如 `chs`、`cht`、`en`
+- `/srtp language auto`：跟随 Minecraft 客户端语言
+- `/srtp language default`：恢复服务器默认语言
 
 所需权限为 `simprtp.language`，默认向所有玩家开放。管理员仍可通过 `config.yml` 中的 `Language-File` 设置服务器默认语言。
 
 ## Libraries
 SimpRTP uses and is compiled with the following libraries:
 
-- [ParticleLib](https://github.com/ByteZ1337/ParticleLib) (included) - Particles library by ByteZ1337. Find all supported particles [here](https://github.com/ByteZ1337/ParticleLib/blob/master/src/main/java/xyz/xenondevs/particle/ParticleEffect.java)
-- [Folia API](https://github.com/PaperMC/Folia) (provided) - Modern Folia server API target for chunk loading and scheduler compatibility.
-- [FoliaLib](https://github.com/TechnicallyCoded/FoliaLib) (included) - Library for interfacing with Folia specific APIs, used for cross-platform timers.
+- [Folia API](https://github.com/PaperMC/Folia) (provided) - Native scheduler, asynchronous teleport and chunk-loading APIs.
+
+SimpRTP no longer bundles cross-version scheduler, particle, or packet compatibility libraries.
 
 Builds targeting Folia 26.1.2+ require Java 25 or newer.
 

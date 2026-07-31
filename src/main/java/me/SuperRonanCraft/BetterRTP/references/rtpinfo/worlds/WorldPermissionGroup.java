@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@SuppressWarnings("rawtypes")
 public class WorldPermissionGroup implements RTPWorld, RTPWorld_Defaulted {
     private boolean useWorldborder, RTPOnDeath;
     private int centerX, centerZ, maxRad, minRad, price, miny, maxy;
@@ -23,15 +22,16 @@ public class WorldPermissionGroup implements RTPWorld, RTPWorld_Defaulted {
     @Getter private final String groupName;
     private long cooldown;
 
-    public WorldPermissionGroup(String group, World world, Map.Entry fields) {
+    public WorldPermissionGroup(String group, World world, Map.Entry<?, ?> fields) {
         this.groupName = group;
         this.world = world;
         setupDefaults();
 
         this.priority = 0;
+        if (!(fields.getValue() instanceof Map<?, ?> values))
+            return;
         //Find Location and cache its values
-        for (Object hash2 : ((HashMap) fields.getValue()).entrySet()) {
-            Map.Entry hash3 = (Map.Entry) hash2;
+        for (Map.Entry<?, ?> hash3 : values.entrySet()) {
             String field = hash3.getKey().toString();
             if (field.equalsIgnoreCase("Priority")) {
                 if (hash3.getValue().getClass() == Integer.class) {
@@ -82,8 +82,8 @@ public class WorldPermissionGroup implements RTPWorld, RTPWorld_Defaulted {
                 }
             }
             if (field.equalsIgnoreCase("Biomes")) {
-                if (hash3.getValue().getClass() == ArrayList.class) {
-                    this.biomes = new ArrayList<String>((ArrayList) hash3.getValue());
+                if (hash3.getValue() instanceof List<?> biomeList) {
+                    this.biomes = biomeList.stream().map(Object::toString).collect(java.util.stream.Collectors.toCollection(ArrayList::new));
                     BetterRTP.debug("- - Biomes: " + biomes);
                 }
             }

@@ -17,12 +17,8 @@ import me.SuperRonanCraft.BetterRTP.references.messages.Message_RTP;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
 import me.SuperRonanCraft.BetterRTP.references.player.playerdata.PlayerDataManager;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.CooldownHandler;
-import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueHandler;
 import me.SuperRonanCraft.BetterRTP.references.settings.Settings;
-import me.SuperRonanCraft.BetterRTP.references.web.Metrics;
-import me.SuperRonanCraft.BetterRTP.references.web.Updater;
 import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
-import me.SuperRonanCraft.BetterRTP.versions.FoliaHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -42,22 +38,17 @@ public class BetterRTP extends JavaPlugin {
     @Getter private final PlayerDataManager playerDataManager = new PlayerDataManager();
     @Getter private final Settings settings = new Settings();
     @Getter private final CooldownHandler cooldowns = new CooldownHandler();
-    @Getter private final QueueHandler queue = new QueueHandler();
     @Getter private final DatabaseHandler databaseHandler = new DatabaseHandler();
     @Getter private final WarningHandler warningHandler = new WarningHandler();
     @Getter private boolean PlaceholderAPI;
     @Getter private final RTPLogger rtpLogger = new RTPLogger();
-    @Getter private final FoliaHandler foliaHandler = new FoliaHandler();
 
     @Override
     public void onEnable() {
         instance = this;
         registerDependencies();
         loadAll();
-        new Updater(this);
-        new Metrics(this);
         listener.registerEvents(this);
-        queue.registerEvents(this);
         try {
             new DepPlaceholderAPI().register();
         } catch (NoClassDefFoundError e) {
@@ -69,7 +60,6 @@ public class BetterRTP extends JavaPlugin {
     public void onDisable() {
         invs.unload();
         pInfo.unloadAll();
-        queue.unload();
         rtpLogger.unload();
     }
 
@@ -103,7 +93,6 @@ public class BetterRTP extends JavaPlugin {
 
     //(Re)Load all plugin systems/files/cache
     private void loadAll() {
-        foliaHandler.load();
         playerDataManager.clear();
         files.loadAll();
         settings.load();
@@ -116,7 +105,6 @@ public class BetterRTP extends JavaPlugin {
         listener.load();
         eco.load();
         perms.register();
-        queue.load();
     }
 
     public static void debug(String str) {

@@ -8,7 +8,6 @@ permissions:
             simprtp.player: true
             simprtp.reload: true
             simprtp.language: true
-            simprtp.updater: true
             simprtp.group.*: true
     simprtp.world:
         description: 使用世界随机传送指令
@@ -52,9 +51,6 @@ permissions:
     # 重载
     simprtp.reload:
         description: 重载插件配置
-        default: op
-    simprtp.updater:
-        description: 接收插件更新提示
         default: op
     simprtp.test:
         description: 在调试模式下测试粒子、药水和声音效果

@@ -2,7 +2,12 @@ package me.SuperRonanCraft.BetterRTP.references.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 
@@ -18,9 +23,15 @@ public class HelperRTP_Info {
         if (PermissionNode.BIOME.check(sendi))
             for (int i = start; i < args.length; i++) {
                 String str = args[i];
-                try {
-                    biomes.add(Biome.valueOf(str.replaceAll(",", "").toUpperCase()).name());
-                } catch (Exception e) {
+                String name = str.replace(",", "").toLowerCase(Locale.ROOT);
+                NamespacedKey key = NamespacedKey.fromString(name);
+                if (key == null && !name.contains(":"))
+                    key = NamespacedKey.minecraft(name);
+                Registry<Biome> registry = RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME);
+                Biome biome = key == null ? null : registry.get(key);
+                if (biome != null) {
+                    biomes.add(biome.getKey().getKey());
+                } else {
                     if (!error_sent) {
                         MessagesCore.OTHER_BIOME.send(sendi, str);
                         error_sent = true;
@@ -31,13 +42,11 @@ public class HelperRTP_Info {
     }
 
     public static void addBiomes(List<String> list, String[] args) {
-        try {
-            for (Biome b : Biome.values())
-                if (b.name().toUpperCase().replaceAll("minecraft:", "").startsWith(args[args.length - 1].toUpperCase()))
-                    list.add(b.name().replaceAll("minecraft:", ""));
-        } catch (NoSuchMethodError e) {
-            //Not in 1.14.X
-        }
+        String prefix = args[args.length - 1].toLowerCase();
+        RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME).stream()
+                .map(biome -> biome.getKey().getKey())
+                .filter(name -> name.startsWith(prefix))
+                .forEach(list::add);
     }
 
 }

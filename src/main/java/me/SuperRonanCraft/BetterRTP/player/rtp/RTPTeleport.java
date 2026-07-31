@@ -52,7 +52,7 @@ public class RTPTeleport {
                     //Save respawn location if first join
                     if (type == RTP_TYPE.JOIN) //RTP Type was Join
                         if (BetterRTP.getInstance().getSettings().isRtpOnFirstJoin_SetAsRespawn()) //Save as respawn is enabled
-                            p.setBedSpawnLocation(loc, true); //True means to force a respawn even without a valid bed
+                            p.setRespawnLocation(loc, true);
                 });
             }).exceptionally(ex -> {
                 AsyncHandler.syncAtEntity(p, () -> getPl().getPInfo().getRtping().remove(p));
@@ -68,7 +68,7 @@ public class RTPTeleport {
     //Effects
 
     public void afterTeleport(Player p, Location loc, WorldPlayer wPlayer, int attempts, Location oldLoc, RTP_TYPE type) {
-        //Only a successful rtp should run this OR '/rtp test'
+        //Only a successful rtp should run this OR '/srtp test'
         effects.getSounds().playTeleport(p);
         effects.getParticles().display(p);
         effects.getPotions().giveEffects(p);

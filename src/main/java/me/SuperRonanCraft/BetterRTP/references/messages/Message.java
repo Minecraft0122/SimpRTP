@@ -5,7 +5,7 @@ import lombok.NonNull;
 import me.SuperRonanCraft.BetterRTP.references.file.FileData;
 import me.SuperRonanCraft.BetterRTP.references.messages.placeholder.PlaceholderAnalyzer;
 import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,6 +17,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public interface Message {
+
+    LegacyComponentSerializer LEGACY_AMPERSAND = LegacyComponentSerializer.legacyAmpersand();
+    LegacyComponentSerializer LEGACY_SECTION = LegacyComponentSerializer.legacySection();
 
     FileData lang();
 
@@ -147,6 +150,6 @@ public interface Message {
             message = message.replace(hexCode, builder.toString());
             matcher = pattern.matcher(message);
         }
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return LEGACY_SECTION.serialize(LEGACY_AMPERSAND.deserialize(message));
     }
 }

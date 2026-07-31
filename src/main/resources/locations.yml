@@ -12,7 +12,7 @@
 
 Enabled: false # 是否启用位置功能
 RequirePermission: false # 是否要求玩家拥有 simprtp.location.<位置名称> 权限
-UseLocationIfAvailable: true # 当前世界存在可用位置时，执行 /rtp 是否优先使用位置
+UseLocationIfAvailable: true # 当前世界存在可用位置时，执行 /srtp 是否优先使用位置
 UseLocationsInSameWorld: true # 是否只能使用目标世界中的位置
 # 启用 UseLocationsInSameWorld 后，simprtp.bypass.location 权限可允许跨世界使用位置
 

@@ -5,32 +5,14 @@ author: SuperRonanCraft
 folia-supported: true #As of 3.6.8 thanks to LOOHP#6007, TechnicallyCoded#9095 and loving11ish#2066
 softdepend:
     - Vault
-    - WorldGuard #Respect WorldGuard areas (https://dev.bukkit.org/projects/worldguard)
-    - GriefPrevention #Respect GriefPrevention areas (https://www.spigotmc.org/resources/griefprevention.1884/)
-    - Towny #Respect Towny areas (https://www.spigotmc.org/resources/towny.72694/)
-    - RedProtect #Respect RedProtect areas (https://www.spigotmc.org/resources/redprotect.15841/)
-      ##Saber Factions And FactionsUUID have the name plugin.yml name!##
-      #Respect SaberFactions areas (https://www.spigotmc.org/resources/saberfactions.69771/)
-      #Respect FactionsUUID areas (https://www.spigotmc.org/resources/factionsuuid.1035/)
-    - Factions
-    - Lands #Respect Lands areas (https://www.spigotmc.org/resources/lands.53313/)
-    - Residence #Respect Residence areas (https://www.spigotmc.org/resources/residence.11480/)
-    - Kingdoms #Respect KingdomsX areas (https://www.spigotmc.org/resources/kingdomsx.77670/)
-    - hClaims #Respect hClaims areas (https://www.spigotmc.org/resources/hclaims.90540/)
-    - GriefDefender #Respect GriefDefender areas (https://www.spigotmc.org/resources/griefdefender.68900/)
-    - UltimateClaims #Respect UltimateClaims areas (https://songoda.com/marketplace/product/ultimateclaims-the-ultimate-claiming-plugin.65)
-    - Pueblos #Respect Pueblos regions (https://www.spigotmc.org/resources/pueblos.91255/) (My Favorite :D)
-    # Convince
-    - ProtocolLib
     - Multiverse-Core #Forcing Multiverse to load BEFORE SimpRTP
     - Essentials #adds `/back` support
     - PlaceholderAPI
-    - HuskClaims #Respect HuskClaims areas (https://www.spigotmc.org/resources/huskclaims-1-17-1-21-modern-golden-shovel-land-claiming-fully-cross-server-compatible.114467/) (fixes race condition that breaks hooking)
 api-version: '26.1'
 
 commands:
-    simprtp:
-        aliases: [betterrtp, brtp, rtp, randomtp, wild, wildtp]
+    srtp:
+        aliases: [simprtp, rtp, randomtp, wild, wildtp]
         description: 随机传送到安全位置
 
 permissions:
@@ -41,7 +23,6 @@ permissions:
             simprtp.bypass.*: true
             simprtp.player: true
             simprtp.reload: true
-            simprtp.updater: true
             simprtp.biome: true
             simprtp.language: true
             simprtp.version: true
@@ -82,9 +63,6 @@ permissions:
         description: 绕过饥饿值检查
     simprtp.reload:
         description: 重载插件配置
-        default: op
-    simprtp.updater:
-        description: 接收插件更新提示
         default: op
     simprtp.info:
         description: 查看可使用随机传送的世界信息

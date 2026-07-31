@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
@@ -45,52 +44,38 @@ public class DatabasePlayers extends SQLite {
         if (data == null || data.player == null) {
             return;
         }
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            Future<?> task = SQLiteExecutor.EXECUTOR.submit(() -> {
-                Connection conn = null;
-                PreparedStatement ps = null;
-                ResultSet rs = null;
-                try {
-                    conn = getSQLConnection();
-                    ps = conn.prepareStatement("SELECT * FROM " + tables.get(0) + " WHERE " + COLUMNS.UUID.name + " = ?");
-                    ps.setString(1, data.player.getUniqueId().toString());
+            conn = getSQLConnection();
+            ps = conn.prepareStatement("SELECT * FROM " + tables.get(0) + " WHERE " + COLUMNS.UUID.name + " = ?");
+            ps.setString(1, data.player.getUniqueId().toString());
 
-                    rs = ps.executeQuery();
-                    if (rs.next()) {
-                        long count = rs.getLong(COLUMNS.COUNT.name);
-                        long time = rs.getLong(COLUMNS.LAST_COOLDOWN_DATE.name);
-                        data.setRtpCount(Math.toIntExact(count));
-                        data.setGlobalCooldown(time);
-                    }
-                } catch (SQLException ex) {
-                    BetterRTP.getInstance().getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
-                } finally {
-                    close(ps, rs, conn);
-                }
-            });
-            task.get();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                long count = rs.getLong(COLUMNS.COUNT.name);
+                long time = rs.getLong(COLUMNS.LAST_COOLDOWN_DATE.name);
+                data.setRtpCount(Math.toIntExact(count));
+                data.setGlobalCooldown(time);
+            }
+        } catch (SQLException ex) {
+            BetterRTP.getInstance().getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
+        } finally {
+            close(ps, rs, conn);
         }
     }
 
     //Set a player Cooldown
     public void setData(PlayerData data) {
-        try {
-            SQLiteExecutor.EXECUTOR.submit(() -> {
-                String sql = "INSERT OR REPLACE INTO " + tables.get(0) + " ("
-                    + COLUMNS.UUID.name + ", "
-                    + COLUMNS.COUNT.name + ", "
-                    + COLUMNS.LAST_COOLDOWN_DATE.name + ") VALUES(?, ?, ?)";
-                List<Object> params = new ArrayList<Object>() {{
-                    add(data.player.getUniqueId().toString());
-                    add(data.getRtpCount());
-                    add(data.getGlobalCooldown());
-                }};
-                sqlUpdate(sql, params);
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        String sql = "INSERT OR REPLACE INTO " + tables.get(0) + " ("
+            + COLUMNS.UUID.name + ", "
+            + COLUMNS.COUNT.name + ", "
+            + COLUMNS.LAST_COOLDOWN_DATE.name + ") VALUES(?, ?, ?)";
+        List<Object> params = List.of(
+                data.player.getUniqueId().toString(),
+                data.getRtpCount(),
+                data.getGlobalCooldown());
+        sqlUpdate(sql, params);
     }
 }

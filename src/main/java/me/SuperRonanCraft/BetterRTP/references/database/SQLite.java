@@ -118,9 +118,7 @@ public abstract class SQLite {
 
     private Enum<?>[] getColumns(DATABASE_TYPE type) {
         switch (type) {
-            case CHUNK_DATA: return DatabaseChunkData.COLUMNS.values();
             case PLAYERS: return DatabasePlayers.COLUMNS.values();
-            case QUEUE: return DatabaseQueue.COLUMNS.values();
             case COOLDOWN:
             default: return DatabaseCooldowns.COLUMNS.values();
         }
@@ -128,9 +126,7 @@ public abstract class SQLite {
 
     private String getColumnName(DATABASE_TYPE type, Enum<?> column) {
         switch (type) {
-            case CHUNK_DATA: return ((DatabaseChunkData.COLUMNS) column).name;
             case PLAYERS: return ((DatabasePlayers.COLUMNS) column).name;
-            case QUEUE: return ((DatabaseQueue.COLUMNS) column).name;
             case COOLDOWN:
             default: return ((DatabaseCooldowns.COLUMNS) column).name;
         }
@@ -138,9 +134,7 @@ public abstract class SQLite {
 
     private String getColumnType(DATABASE_TYPE type, Enum<?> column) {
         switch (type) {
-            case CHUNK_DATA: return ((DatabaseChunkData.COLUMNS) column).type;
             case PLAYERS: return ((DatabasePlayers.COLUMNS) column).type;
-            case QUEUE: return ((DatabaseQueue.COLUMNS) column).type;
             case COOLDOWN:
             default: return ((DatabaseCooldowns.COLUMNS) column).type;
         }
@@ -238,7 +232,5 @@ public abstract class SQLite {
     public enum DATABASE_TYPE {
         PLAYERS,
         COOLDOWN,
-        QUEUE,
-        CHUNK_DATA,
     }
 }

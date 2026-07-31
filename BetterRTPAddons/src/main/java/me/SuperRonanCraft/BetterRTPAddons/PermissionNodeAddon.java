@@ -17,8 +17,4 @@ public enum PermissionNodeAddon implements PermissionCheck {
         this.node = PermissionCheck.getPrefix() + node;
     }
 
-    @Override public boolean isDev() {
-        return false;
-    }
-
 }

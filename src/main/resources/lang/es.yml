@@ -28,7 +28,7 @@ Messages:
   Moved: '&c¡Te has movido! &7¡El teletransporte aleatorio fue cancelado!'
   NotExist: '&c¡Parece que el mundo &7%world% &cno existe!'
   Already: '&c¡Oops! &7¡Parece que ya estás teletransportandote aleatoriamente, ten un poco de paciencia!'
-  Sign: '&7¡Un cartel de comando ha sido creado! &7El comando es... ''&f/rtp %command%&7'''
+  Sign: '&7¡Un cartel de comando ha sido creado! &7El comando es... ''&f/srtp %command%&7'''
   Edit:
     Error: '&c¡Error! &7¡Entrada proporcionada inválida!'
     Set: '&b¡Exito! &7%type% establecido a %value%'

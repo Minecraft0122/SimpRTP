@@ -27,7 +27,7 @@ Messages:
   Moved: '&c您移動了，&7隨機傳送被取消了！'
   NotExist: '&c看上去&7%world%&c世界並不存在！'
   Already: '&c哎呦！&7看上去您已經在傳送中了，耐心一點點！'
-  Sign: '&7指令標記已創建！&7指令為''&f/rtp %command%&7''。'
+  Sign: '&7指令標記已創建！&7指令為''&f/srtp %command%&7''。'
   Edit:
     Error: '&c錯誤！&7無效的輸入！'
     Set: '&b成功！&7%type% 已設為 %value%。'

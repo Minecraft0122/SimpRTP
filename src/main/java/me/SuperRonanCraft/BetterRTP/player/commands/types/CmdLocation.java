@@ -30,7 +30,7 @@ public class CmdLocation implements RTPCommand, RTPCommandHelpable {
         return "location";
     }
 
-    //rtp location <location name> [player]
+    //srtp location <location name> [player]
     public void execute(CommandSender sendi, String label, String[] args) {
         if (args.length == 2) {
             if (sendi instanceof Player) {
@@ -42,7 +42,7 @@ public class CmdLocation implements RTPCommand, RTPCommandHelpable {
                     }
                 usage(sendi, label);
             } else
-                sendi.sendMessage("Console is not able to execute this command! Try '/rtp help'");
+                sendi.sendMessage("Console is not able to execute this command! Try '/srtp help'");
         } else if (args.length == 3 && PermissionNode.RTP_OTHER.check(sendi)) {
             Player p = Bukkit.getPlayer(args[2]);
             if (p != null && p.isOnline()) {

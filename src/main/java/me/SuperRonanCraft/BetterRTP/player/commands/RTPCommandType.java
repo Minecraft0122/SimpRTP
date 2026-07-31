@@ -11,14 +11,11 @@ public enum RTPCommandType {
     LOCATION(new CmdLocation()),
     PLAYER(new CmdPlayer()),
     PLAYERSUDO(new CmdPlayerSudo()),
-    QUEUE(new CmdQueue(), true),
     RELOAD(new CmdReload()),
     //SETTINGS(new CmdSettings(), true),
     TEST(new CmdTest(), true),
     VERSION(new CmdVersion()),
     WORLD(new CmdWorld()),
-    DEV(new CmdDeveloper(), true),
-    LOGGER(new CmdLogger(), true),
     ;
 
     private final RTPCommand cmd;

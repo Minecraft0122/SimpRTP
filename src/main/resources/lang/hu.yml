@@ -33,7 +33,7 @@ Messages:
   Moved: '&cMozogtál! &7RTP megszakítva!'
   NotExist: '&cÚgy tűnik, a világ &7%world% &cnem létezik!'
   Already: '&cHoppá! &7Úgy tűnik, már RTP-zel, légy türelmes!'
-  Sign: '&7Parancs tábla létrehozva! &7Parancs: ''&f/rtp %command%&7'''
+  Sign: '&7Parancs tábla létrehozva! &7Parancs: ''&f/srtp %command%&7'''
   Edit:
     Error: '&cHiba! &7Érvénytelen bemenet!'
     Set: '&bSikeres! &7%type% beállítva erre: %value%'

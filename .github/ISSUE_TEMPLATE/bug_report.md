@@ -5,7 +5,7 @@ about: Create a report refering a potential/known bug
 ---
 
 **Plugin Version**:
-<!-- Use "/rtp version" to get the plugin version -->
+<!-- Use "/srtp version" to get the plugin version -->
 
 **Describe The Bug**:
 <!-- Files not loading nor generating, commands aren't working, ect. -->

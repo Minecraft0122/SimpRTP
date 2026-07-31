@@ -27,7 +27,7 @@ public class CmdPlayer implements RTPCommand, RTPCommandHelpable {
         return "player";
     }
 
-    //rtp player <player> <world> <RTP_PlayerInfo.RTP_PLAYERINFO_FLAG...>
+    //srtp player <player> <world> <RTP_PlayerInfo.RTP_PLAYERINFO_FLAG...>
     public void execute(CommandSender sendi, String label, String[] args) {
         if (args.length < 2) {
             usage(sendi, label);
@@ -91,7 +91,7 @@ public class CmdPlayer implements RTPCommand, RTPCommandHelpable {
         List<String> list = new ArrayList<>();
         if (args.length == 2) {
             for (Player p : Bukkit.getOnlinePlayers())
-                if (p.getDisplayName().toLowerCase().startsWith(args[1].toLowerCase()))
+                if (p.getName().toLowerCase().startsWith(args[1].toLowerCase()))
                     list.add(p.getName());
         } else if (args.length == 3) {
             for (World w : Bukkit.getWorlds())

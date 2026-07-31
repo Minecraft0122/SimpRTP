@@ -1,21 +1,17 @@
 package me.SuperRonanCraft.BetterRTP.player.commands.types;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.player.commands.RTPCommand;
@@ -27,18 +23,10 @@ import me.SuperRonanCraft.BetterRTP.references.PermissionCheck;
 import me.SuperRonanCraft.BetterRTP.references.PermissionNode;
 import me.SuperRonanCraft.BetterRTP.references.helpers.HelperRTP;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message;
-import me.SuperRonanCraft.BetterRTP.references.messages.Message_RTP;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesHelp;
-import me.SuperRonanCraft.BetterRTP.references.rtpinfo.QueueHandler;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldDefault;
 import me.SuperRonanCraft.BetterRTP.references.rtpinfo.worlds.WorldPlayer;
-import me.SuperRonanCraft.BetterRTP.references.web.LogUploader;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import xyz.xenondevs.particle.ParticleEffect;
 
 public class CmdInfo implements RTPCommand, RTPCommandHelpable {
 
@@ -109,7 +97,9 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
         List<String> info = new ArrayList<>();
         // BetterRTP pl = BetterRTP.getInstance();
 
-        for (ParticleEffect eff : ParticleEffect.VALUES) {
+        for (Particle eff : Particle.values()) {
+            if (eff.getDataType() != Void.class)
+                continue;
             if (info.isEmpty() || info.size() % 2 == 0) {
                 info.add("&7" + eff.name() + "&r");
             } else
@@ -139,38 +129,9 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
 
     //World
     public static void sendInfoWorld(CommandSender sendi, List<String> list, String label, String[] args) { //Send info
-        boolean upload = Arrays.asList(args).contains("_UPLOAD_");
         list.add(0, "&e&m-----&6 SimpRTP &8| Info &e&m-----");
-        list.forEach(str -> list.set(list.indexOf(str), Message.color(str)));
-
-        String cmd = "/" + label + " " + String.join(" ", args);
-        if (!upload) {
-            sendi.sendMessage(list.toArray(new String[0]));
-            if (sendi instanceof Player) {
-                TextComponent component = new TextComponent(Message.color("&7- &7Click to upload command log to &flogs.ronanplugins.com"));
-                component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, cmd + " _UPLOAD_"));
-                component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Message.color("&6Suggested command&f: &7" + cmd + " _UPLOAD_")).create()));
-                ((Player) sendi).spigot().sendMessage(component);
-            } else {
-                sendi.sendMessage("Execute `" + cmd + " _UPLOAD_`" + " to upload command log to https://logs.ronanplugins.com");
-            }
-        } else {
-            list.add(0, "Command: " + cmd);
-            list.forEach(str -> list.set(list.indexOf(str), ChatColor.stripColor(str)));
-            CompletableFuture.runAsync(() -> {
-                String key = LogUploader.post(list);
-                if (key == null) {
-                    Message.sms(sendi, new ArrayList<>(Collections.singletonList("&cAn error occured attempting to upload log!")), null);
-                } else {
-                    try {
-                        JSONObject json = (JSONObject) new JSONParser().parse(key);
-                        Message.sms(sendi, Arrays.asList(" ", Message.getPrefix(Message_RTP.msg) + "&aLog uploaded! &fView&7: &6https://logs.ronanplugins.com/" + json.get("key")), null);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
-        }
+        list.replaceAll(Message::color);
+        sendi.sendMessage(list.toArray(new String[0]));
     }
 
     private void infoWorld(CommandSender sendi, String label, String[] args) { //All worlds
@@ -213,7 +174,6 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
             info.add("&7- &6Biomes&7: &f" + _rtpworld.getBiomes().toString());
             info.add("&7- &eShape&7: &f" + _rtpworld.getShape().toString() + getInfo(_rtpworld, worldDefault, "shape"));
             info.add("&7- &6Permission Group&7: " + (_rtpworld.getConfig() != null ? "&a" + _rtpworld.getConfig().getGroupName() : "&cN/A"));
-            info.add("&7- &eQueue Available&7: " + (QueueHandler.isEnabled() ? QueueHandler.getApplicableAsync(_rtpworld).size() : "&cDisabled"));
         }
         return info;
     }
@@ -248,11 +208,12 @@ public class CmdInfo implements RTPCommand, RTPCommandHelpable {
     private void infoEffects(CommandSender sendi) {
         List<String> info = new ArrayList<>();
 
-        for (PotionEffectType effect : PotionEffectType.values()) {
+        for (PotionEffectType effect : RegistryAccess.registryAccess().getRegistry(RegistryKey.MOB_EFFECT)) {
+            String effectName = effect.getKey().getKey();
             if (info.isEmpty() || info.size() % 2 == 0) {
-                info.add("&7" + effect.getName() + "&r");
+                info.add("&7" + effectName + "&r");
             } else
-                info.add("&f" + effect.getName() + "&r");
+                info.add("&f" + effectName + "&r");
         }
 
         info.forEach(str ->

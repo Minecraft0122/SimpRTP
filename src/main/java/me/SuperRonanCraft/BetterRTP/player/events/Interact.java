@@ -4,11 +4,15 @@ import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.player.commands.RTPCommandType;
 import me.SuperRonanCraft.BetterRTP.references.PermissionNode;
 import me.SuperRonanCraft.BetterRTP.references.file.FileOther;
-import me.SuperRonanCraft.BetterRTP.references.messages.Message;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message_RTP;
 import me.SuperRonanCraft.BetterRTP.references.messages.MessagesCore;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
+import org.bukkit.block.sign.Side;
+import org.bukkit.block.sign.SignSide;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
@@ -19,49 +23,54 @@ import java.util.Arrays;
 class Interact {
 
     private boolean enabled;
-    private String title, coloredTitle;
+    private Component coloredTitle;
+    private static final LegacyComponentSerializer LEGACY_TEXT = LegacyComponentSerializer.legacyAmpersand();
+    private static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.plainText();
 
     void load() {
         String pre = "Settings.";
         FileOther.FILETYPE file = BetterRTP.getInstance().getFiles().getType(FileOther.FILETYPE.SIGNS);
         enabled = file.getBoolean(pre + "Enabled");
-        title = file.getString(pre + "Title");
-        coloredTitle = Message.color(title);
+        String title = file.getString(pre + "Title");
+        coloredTitle = LEGACY_TEXT.deserialize(title == null ? "[RTP]" : title);
     }
 
     void event(PlayerInteractEvent e) {
         if (enabled && e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK && isSign(e.getClickedBlock())) {
             Sign sign = (Sign) e.getClickedBlock().getState();
-            if (sign.getLine(0).equals(coloredTitle)) {
-                String command = sign.getLine(1).split(" ")[0];
-                if (cmd(sign.getLines()).split(" ")[0].equalsIgnoreCase("") || cmd(sign.getLines()).split(" ")[0].equalsIgnoreCase("rtp")) {
+            SignSide front = sign.getSide(Side.FRONT);
+            if (front.line(0).equals(coloredTitle)) {
+                String[] lines = plainLines(front.lines());
+                String action = cmd(lines);
+                String command = lines[1].split(" ")[0];
+                if (action.isBlank() || action.split(" ")[0].equalsIgnoreCase("srtp")) {
                     action(e.getPlayer(), null);
                     return;
                 } else
                     for (RTPCommandType cmd : RTPCommandType.values())
                         if (command.equalsIgnoreCase(cmd.name())) {
-                            action(e.getPlayer(), cmd(sign.getLines()).split(" "));
+                            action(e.getPlayer(), action.split(" "));
                             return;
                         }
                 Message_RTP.sms(e.getPlayer(), "&cError! &7Command &a"
-                        + Arrays.toString(cmd(sign.getLines()).split(" ")) + "&7 does not exist! Defaulting command to /rtp!");
+                        + Arrays.toString(action.split(" ")) + "&7 does not exist! Defaulting command to /srtp!");
             }
         }
     }
 
     void createSign(SignChangeEvent e) {
         if (enabled && PermissionNode.SIGN_CREATE.check(e.getPlayer())) {
-            String line = e.getLine(0);
-            if (line != null && (line.equalsIgnoreCase(title) ||
-                    line.equalsIgnoreCase("[RTP]"))) {
-                e.setLine(0, coloredTitle != null ? coloredTitle : "[RTP]");
-                MessagesCore.SIGN.send(e.getPlayer(), cmd(e.getLines()));
+            String line = PLAIN_TEXT.serialize(e.line(0));
+            String plainTitle = PLAIN_TEXT.serialize(coloredTitle);
+            if (line.equalsIgnoreCase(plainTitle) || line.equalsIgnoreCase("[RTP]")) {
+                e.line(0, coloredTitle);
+                MessagesCore.SIGN.send(e.getPlayer(), cmd(plainLines(e.lines())));
             }
         }
     }
 
     private void action(Player p, String[] line) {
-        BetterRTP.getInstance().getCmd().commandExecuted(p, "rtp", line);
+        BetterRTP.getInstance().getCmd().commandExecuted(p, "srtp", line);
     }
 
     private static String cmd(String[] signArray) {
@@ -75,6 +84,10 @@ class Interact {
                     actions = actions.concat(" " + line);
         }
         return actions;
+    }
+
+    private static String[] plainLines(java.util.List<Component> lines) {
+        return lines.stream().map(PLAIN_TEXT::serialize).toArray(String[]::new);
     }
 
     private static boolean isSign(Block block) {

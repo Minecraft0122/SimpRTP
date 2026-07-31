@@ -18,7 +18,7 @@ public class CmdBiome implements RTPCommand, RTPCommandHelpable {
         return "biome";
     }
 
-    //rtp biome <biome1, biome2...>
+    //srtp biome <biome1, biome2...>
     public void execute(CommandSender sendi, String label, String[] args) {
         if (args.length >= 2)
             CmdTeleport.teleport(sendi, label, null, HelperRTP_Info.getBiomes(args, 1, sendi));

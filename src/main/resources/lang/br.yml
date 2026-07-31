@@ -28,7 +28,7 @@ Messages:
   Moved: '&cVocê se moveu! &7O RTP foi cancelado!'
   NotExist: '&cParece que o mundo &7%world% &cnão existe!'
   Already: '&cOps! &7Parece que você já está usando rtp, tenha um pouco de paciência!'
-  Sign: '&7Sinal de comando criado! &7O comando é... ''&f/rtp %command%&7'''
+  Sign: '&7Sinal de comando criado! &7O comando é... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cErro! &7Entrada inválida fornecida!'
     Set: '&bSucesso! &7%type% definido para %value%'

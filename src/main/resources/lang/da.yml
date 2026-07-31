@@ -27,7 +27,7 @@ Messages:
   Moved: '&cDu bevægede dig! &7RTP blev annulleret!'
   NotExist: '&cDet ser ud til, at verden &7%world% &cikke eksisterer!'
   Already: '&cUps! &7Det ser ud til, at du allerede bliver rtp''et, vær tålmodig!'
-  Sign: '&7Kommando skilt er blevet oprettet! &7Kommandoen er... ''&f/rtp %command%&7'''
+  Sign: '&7Kommando skilt er blevet oprettet! &7Kommandoen er... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cFejl! &7Ugyldigt indhold indtastet!'
     Set: '&bSucces! &7%type% er sat til %value%'

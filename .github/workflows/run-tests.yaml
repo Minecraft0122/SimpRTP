@@ -90,7 +90,7 @@ jobs:
 
           def run_checks():
               if process.poll() is None:
-                  process.stdin.write("version\nplugins\nsimprtp version\nsimprtp info\n")
+                  process.stdin.write("version\nplugins\nsrtp version\nsrtp info\n")
                   process.stdin.flush()
                   threading.Timer(5, stop_server).start()
 

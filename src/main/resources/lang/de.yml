@@ -27,7 +27,7 @@ Messages:
   Moved: '&cDu hast dich bewegt! &7RTP wurde abgebrochen!'
   NotExist: '&cEs sieht so aus, als würde es die Welt &7%world% &cnicht geben!'
   Already: '&cUps! &7Es sieht so aus, als würdest du dich zurzeit bereits teleportieren!'
-  Sign: '&7Befehlsschild wurde erstellt! &7Der Befehl lautet... ''&f/rtp %command%&7'''
+  Sign: '&7Befehlsschild wurde erstellt! &7Der Befehl lautet... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cFehler! &7Ungültige Eingabe(n)!'
     Set: '&bErfolg! &7%type% auf %value% gesetzt'

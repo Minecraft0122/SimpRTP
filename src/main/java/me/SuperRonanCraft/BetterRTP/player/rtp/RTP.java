@@ -2,6 +2,9 @@ package me.SuperRonanCraft.BetterRTP.player.rtp;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -24,7 +27,8 @@ public class RTP {
     @Getter final RTPTeleport teleport = new RTPTeleport();
     //Cache
     public final HashMap<String, String> overriden = new HashMap<>();
-    @Getter List<String> disabledWorlds, blockList;
+    @Getter List<String> disabledWorlds;
+    @Getter Set<String> blockList;
     int maxAttempts, delayTime;
     boolean cancelOnMove, cancelOnDamage;
     public final HashMap<String, WORLD_TYPE> world_type = new HashMap<>();
@@ -41,7 +45,9 @@ public class RTP {
         delayTime = config.getInt("Settings.Delay.Time");
         cancelOnMove = config.getBoolean("Settings.Delay.CancelOnMove");
         cancelOnDamage = config.getBoolean("Settings.Delay.CancelOnDamage");
-        blockList = config.getStringList("BlacklistedBlocks");
+        blockList = config.getStringList("BlacklistedBlocks").stream()
+                .map(block -> block.toUpperCase(Locale.ROOT))
+                .collect(Collectors.toUnmodifiableSet());
         //Overrides
         RTPLoader.loadOverrides(overriden);
         //WorldType
@@ -82,7 +88,7 @@ public class RTP {
     private void rtp(CommandSender sendi, WorldPlayer pWorld, RTP_TYPE type) {
         //Cooldown
         Player p = pWorld.getPlayer();
-        getPl().getPInfo().getRtping().put(p, true); //Cache player so they cant run '/rtp' again while rtp'ing
+        getPl().getPInfo().getRtping().put(p, true); //Cache player so they cant run '/srtp' again while rtp'ing
         //Setup player rtp methods
         RTPPlayer rtpPlayer = new RTPPlayer(p, this, pWorld, type);
         // Delaying? Else, just go

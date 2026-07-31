@@ -36,12 +36,9 @@ public class DatabaseCooldowns extends SQLite {
         // If there are disabled worlds, iterate through the loaded worlds on the server and
         // add the world name to the list of table names if they aren't marked as disabled
         List<World> worlds = Bukkit.getWorlds();
-        if (!disabledWorlds.isEmpty()) {
-            for (World world : worlds) {
-                if (!disabledWorlds.contains(world.getName()))
-                    list.add(world.getName());
-            }
-        }
+        for (World world : worlds)
+            if (!disabledWorlds.contains(world.getName()))
+                list.add(world.getName());
 
         return list;
     }

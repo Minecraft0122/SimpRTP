@@ -26,7 +26,7 @@ Messages:
   Moved: '&cTe-ai miscat! &7Teleportarea a fost anulata!'
   NotExist: '&cSe pare ca lumea &7%world% &cnu exista!'
   Already: '&cWhoops! &7Se pare ca te teleportezi deja, ai putina rabdare!'
-  Sign: '&7Sign Command-ul a fost creat! &7Comanda este... ''&f/rtp %command%&7'''
+  Sign: '&7Sign Command-ul a fost creat! &7Comanda este... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cEroare! &7Argumente Invalide!'
     Set: '&bSuccess! &7%type% setat la %value%'

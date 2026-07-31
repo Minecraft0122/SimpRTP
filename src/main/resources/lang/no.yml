@@ -27,7 +27,7 @@ Messages:
   Moved: '&cDu har flyttet deg! &7RTP ble kansellert! '
   NotExist: '&cSer ut som &7%world% &cIkke eksisterer!'
   Already: '&cWhoops! &7 Ser ut som om du allerede rtp''er, ha litt tålmodighet! '
-  Sign: '&7Kommandoskilt er opprettet! &7Kommandoen er ... '' &f/rtp %command%&7 '' '
+  Sign: '&7Kommandoskilt er opprettet! &7Kommandoen er ... '' &f/srtp %command%&7 '' '
   Edit: 
     Error: '&cError! &7Ugyldig verdi er gitt! '
     Set: '&bSuksess! &7%type% satt til %value%'

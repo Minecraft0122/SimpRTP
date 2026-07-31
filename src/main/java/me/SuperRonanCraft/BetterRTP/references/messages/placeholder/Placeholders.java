@@ -17,9 +17,6 @@ public enum Placeholders {
     PRICE("price"),
     DELAY("delay"),
     TIME("time"),
-    // Updater
-    NEWVERSION("newVersion"),
-    CURRENTDVERSION("currentVersion"),
     //Other
     BIOME("biome")
     ;

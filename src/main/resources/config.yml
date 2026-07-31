@@ -1,52 +1,12 @@
 # SimpRTP 插件，作者 SuperRonanCraft
 # 如需帮助，请访问：https://ronanplugins.com/discord
 
-# 服务器默认语言。玩家可使用 /rtp language 单独选择语言。
+# 服务器默认语言。玩家可使用 /srtp language 单独选择语言。
 Language-File: 'chs.yml'
 
 Settings:
-  Respect:
-    ## 是否避开 MinePlots 地块：https://builtbybit.com/resources/mineplots.21646/
-    MinePlots: false
-    ## 是否避开 WorldGuard 区域：https://dev.bukkit.org/projects/worldguard
-    WorldGuard: false
-    ## 是否避开 GriefPrevention 领地：https://www.spigotmc.org/resources/griefprevention.1884/
-    GriefPrevention: false
-    ## 是否避开 Towny 城镇区域：https://www.spigotmc.org/resources/towny.72694/
-    Towny: false
-    ## 是否避开 RedProtect 区域：https://www.spigotmc.org/resources/redprotect.15841/
-    RedProtect: false
-    ## 是否避开 FactionsUUID 领地：https://www.spigotmc.org/resources/factionsuuid.1035/
-    FactionsUUID: false
-    ## 是否避开 Lands 领地：https://www.spigotmc.org/resources/lands.53313/
-    Lands: false
-    ## 是否避开 Residence 领地：https://www.spigotmc.org/resources/residence.11480/
-    Residence: false
-    ## 是否避开 KingdomsX 领地：https://www.spigotmc.org/resources/kingdomsx.77670/
-    KingdomsX: false
-    ## 是否避开 hClaims 领地：https://www.spigotmc.org/resources/hclaims.90540/
-    hClaims: false
-    ## 是否避开 GriefDefender 领地：https://www.spigotmc.org/resources/griefdefender.68900/
-    GriefDefender: false
-    ## 是否避开 UltimateClaims 领地：https://songoda.com/marketplace/product/ultimateclaims-the-ultimate-claiming-plugin.65
-    UltimateClaims: false
-    ## 是否避开 Pueblos 区域：https://www.spigotmc.org/resources/pueblos.91255/
-    Pueblos: false
-    ## 是否避开 SaberFactions 领地：https://www.spigotmc.org/resources/saberfactions.69771/
-    SaberFactions: false
-    ## 是否避开 HuskClaims 领地：https://www.spigotmc.org/resources/huskclaims.114467/
-    HuskClaims: false
-    ## 是否避开 HuskTowns 城镇区域：https://www.spigotmc.org/resources/husktowns.92672/
-    HuskTowns: false
-    ## 是否避开与 FactionsBridge 兼容的领地：https://www.spigotmc.org/resources/factionsbridge.89716/
-    FactionsBridge: false
-    ## 是否避开 CrashClaim 领地：https://www.spigotmc.org/resources/crashclaim.94037/
-    CrashClaim: false
-
   ## 是否在控制台输出调试信息
   Debugger: false
-  ## 找到安全位置后，预加载其周围多少个区块
-  PreloadRadius: 5
   ## 找不到安全位置时的最大尝试次数
   MaxAttempts: 32
   RtpOnFirstJoin:
@@ -62,9 +22,6 @@ Settings:
     Enabled: true # 是否启用传送前等待
     Time: 5 # 等待时间，单位：秒；设为 0 禁用
     CancelOnMove: true # 等待期间移动是否取消传送
-  Queue:
-    Enabled: true # 是否预先搜索安全位置，以加快 /rtp 执行速度
-  DisableUpdater: false # 是否禁用更新检查
   Logger:
     Enabled: true # 是否将随机传送事件写入 log.log
     LogToConsole: false # 是否同时输出到控制台
@@ -87,16 +44,11 @@ Default:
 
 ## 不允许作为落脚点的方块。材质名称参考 Bukkit Material。
 BlacklistedBlocks:
-  - stationary_water
-  - stationary_lava
   - water
-  - flowing_water
   - lava
-  - flowing_lava
   - cactus
-  - leaves
-  - leaves_2
   - air
+  - cave_air
   - void_air
   - bedrock
   - oak_leaves
@@ -136,7 +88,7 @@ CustomWorlds:
       Shape: 'circle'
       RTPOnDeath: true
 
-## 玩家在某世界执行 /rtp 时，将其重定向到另一个世界
+## 玩家在某世界执行 /srtp 时，将其重定向到另一个世界
 Overrides:
   # 格式：当前世界: 目标世界
   - master_world: 'world'

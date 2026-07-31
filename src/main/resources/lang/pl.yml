@@ -27,7 +27,7 @@ Messages:
   Moved: '&cPoruszyłeś się! &7Teleportacja została odwołana!'
   NotExist: '&cWygląda na to, że świat &7%world% &cnie istnieje!'
   Already: '&cUps! &7Wygląda na to, że jesteś już podczas losowej teleportacji, cierpliwości!'
-  Sign: '&7Tabliczka z komendą utworzony! &7Komendą jest... ''&f/rtp %command%&7'''
+  Sign: '&7Tabliczka z komendą utworzony! &7Komendą jest... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cBłąd! &7Wpisano niewłaściwą wartość!'
     Set: '&bSukces! &7%type% ustawiony na %value%'

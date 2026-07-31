@@ -6,7 +6,8 @@ import me.SuperRonanCraft.BetterRTP.references.PermissionCheck;
 import me.SuperRonanCraft.BetterRTP.references.PermissionNode;
 import me.SuperRonanCraft.BetterRTP.references.messages.Message;
 import me.SuperRonanCraft.BetterRTPAddons.util.Files;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -23,6 +24,8 @@ import java.util.Map;
 
 public class RTPMenu_SelectWorld {
 
+    private static final LegacyComponentSerializer LEGACY_TEXT = LegacyComponentSerializer.legacyAmpersand();
+
     public static boolean createInv(AddonRTPMenu pl, Player p) {
         List<World> bukkit_worlds = Bukkit.getWorlds();
         List<World> actual_worlds = new ArrayList<>();
@@ -31,7 +34,7 @@ public class RTPMenu_SelectWorld {
                 actual_worlds.add(world);
         }
         if (actual_worlds.isEmpty() || (actual_worlds.size() <= 1 && !BetterRTP.getInstance().getSettings().isDebug())) {
-            CmdTeleport.teleport(p, "rtp", null, null);
+            CmdTeleport.teleport(p, "srtp", null, null);
             return false;
         }
         int lines = pl.getSettings().getLines();
@@ -49,10 +52,12 @@ public class RTPMenu_SelectWorld {
             ItemStack item = new ItemStack(worldInfo.item, 1);
             ItemMeta meta = item.getItemMeta();
             assert meta != null;
-            meta.setDisplayName(color(p, worldInfo.name));
-            List<String> lore = new ArrayList<>(worldInfo.lore);
-            lore.forEach(s -> lore.set(lore.indexOf(s), color(p, s).replace("%world%", world.getValue().getName())));
-            meta.setLore(lore);
+            meta.displayName(color(p, worldInfo.name));
+            List<Component> lore = worldInfo.lore.stream()
+                    .map(line -> line.replace("%world%", world.getValue().getName()))
+                    .map(line -> color(p, line))
+                    .toList();
+            meta.lore(lore);
             item.setItemMeta(meta);
             inv.setItem(slot, item);
         }
@@ -128,12 +133,11 @@ public class RTPMenu_SelectWorld {
         return 0;
     }
 
-    private static String color(CommandSender sendi, String str) {
-        return ChatColor.translateAlternateColorCodes('&', Message.placeholder(sendi, str));
+    private static Component color(CommandSender sendi, String str) {
+        return LEGACY_TEXT.deserialize(Message.placeholder(sendi, str));
     }
 
-    private static Inventory createInventory(String title, int size) {
-        title = Message.color(title);
+    private static Inventory createInventory(Component title, int size) {
         return Bukkit.createInventory(null, Math.max(Math.min(size, 54), 9), title);
     }
 

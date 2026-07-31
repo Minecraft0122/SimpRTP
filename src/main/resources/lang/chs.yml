@@ -28,7 +28,7 @@ Messages:
   Moved: '&c你移动了，&7随机传送已取消！'
   NotExist: '&c世界 &7%world% &c不存在！'
   Already: '&c你已经在进行随机传送，请耐心等待！'
-  Sign: '&a已创建随机传送指令牌！&7指令：&f/rtp %command%'
+  Sign: '&a已创建随机传送指令牌！&7指令：&f/srtp %command%'
   Language:
     Current: '&a当前语言：&f%language% &7（选择方式：%preference%）'
     Available: '&7可用语言：&f%languages%&7。还可使用 &fauto &7或 &fdefault&7。'

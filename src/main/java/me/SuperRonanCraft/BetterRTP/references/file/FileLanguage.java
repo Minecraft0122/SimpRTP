@@ -110,7 +110,7 @@ public class FileLanguage implements FileData {
 
     public void loadPlayer(Player player) {
         String preference = player.getPersistentDataContainer().get(languageKey(), PersistentDataType.STRING);
-        playerLocales.put(player.getUniqueId(), player.getLocale());
+        playerLocales.put(player.getUniqueId(), player.locale().toLanguageTag());
         if (preference == null)
             playerLanguages.remove(player.getUniqueId());
         else

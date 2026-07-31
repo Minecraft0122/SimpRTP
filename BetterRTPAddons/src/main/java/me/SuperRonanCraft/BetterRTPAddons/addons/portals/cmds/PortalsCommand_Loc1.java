@@ -1,6 +1,5 @@
 package me.SuperRonanCraft.BetterRTPAddons.addons.portals.cmds;
 
-import com.comphenix.protocol.events.PacketContainer;
 import me.SuperRonanCraft.BetterRTPAddons.addons.portals.AddonPortals;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -8,8 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class PortalsCommand_Loc1 implements PortalsCommands, LocationFinder {
-
-    private PacketContainer fakeBlock;
 
     @Override
     public void execute(CommandSender sendi, String label, String[] args, AddonPortals addon) {

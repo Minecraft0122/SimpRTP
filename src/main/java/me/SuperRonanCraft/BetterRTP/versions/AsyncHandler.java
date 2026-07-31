@@ -1,22 +1,23 @@
 package me.SuperRonanCraft.BetterRTP.versions;
 
-import com.tcoded.folialib.impl.ServerImplementation;
-import com.tcoded.folialib.wrapper.task.WrappedTask;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import me.SuperRonanCraft.BetterRTP.BetterRTP;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class AsyncHandler {
 
     public static void async(Runnable runnable) {
-        getFolia().runAsync(task -> runnable.run());
+        Bukkit.getAsyncScheduler().runNow(getPlugin(), task -> runnable.run());
     }
 
     public static void sync(Runnable runnable) {
-        getFolia().runNextTick(task -> runnable.run());
+        Bukkit.getGlobalRegionScheduler().run(getPlugin(), task -> runnable.run());
     }
 
     public static void syncAtEntity(Entity entity, Runnable runnable) {
@@ -24,7 +25,7 @@ public class AsyncHandler {
     }
 
     public static void syncAtEntity(Entity entity, Runnable runnable, Runnable retired) {
-        getFolia().runAtEntityWithFallback(entity, task -> runnable.run(), retired);
+        entity.getScheduler().run(getPlugin(), task -> runnable.run(), retired);
     }
 
     public static void syncAtSender(CommandSender sender, Runnable runnable) {
@@ -35,23 +36,24 @@ public class AsyncHandler {
     }
 
     public static void syncAtLocation(Location location, Runnable runnable) {
-        getFolia().runAtLocation(location, task -> runnable.run());
+        Bukkit.getRegionScheduler().run(getPlugin(), location, task -> runnable.run());
     }
 
     public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location location) {
-        return getFolia().teleportAsync(entity, location);
+        return entity.teleportAsync(location);
     }
 
-    public static WrappedTask asyncLater(Runnable runnable, long ticks) {
-        return getFolia().runLaterAsync(runnable, ticks);
+    public static ScheduledTask asyncLater(Runnable runnable, long ticks) {
+        return Bukkit.getAsyncScheduler().runDelayed(
+                getPlugin(), task -> runnable.run(), ticks * 50L, TimeUnit.MILLISECONDS);
     }
 
-    public static WrappedTask syncLater(Runnable runnable, long ticks) {
-        return getFolia().runLater(runnable, ticks);
+    public static ScheduledTask syncLater(Runnable runnable, long ticks) {
+        return Bukkit.getGlobalRegionScheduler().runDelayed(getPlugin(), task -> runnable.run(), ticks);
     }
 
-    public static WrappedTask syncAtEntityLater(Entity entity, Runnable runnable, long ticks) {
-        return getFolia().runAtEntityLater(entity, runnable, ticks);
+    public static ScheduledTask syncAtEntityLater(Entity entity, Runnable runnable, long ticks) {
+        return entity.getScheduler().runDelayed(getPlugin(), task -> runnable.run(), null, ticks);
     }
 
     public static Object syncAtEntityLaterTask(Entity entity, Runnable runnable, long ticks) {
@@ -59,11 +61,11 @@ public class AsyncHandler {
     }
 
     public static void cancelTask(Object task) {
-        if (task instanceof WrappedTask)
-            ((WrappedTask) task).cancel();
+        if (task instanceof ScheduledTask scheduledTask)
+            scheduledTask.cancel();
     }
 
-    private static ServerImplementation getFolia() {
-        return BetterRTP.getInstance().getFoliaHandler().get();
+    private static BetterRTP getPlugin() {
+        return BetterRTP.getInstance();
     }
 }

@@ -76,7 +76,7 @@ public class AddonLogger implements Addon, Listener {
     @EventHandler
     public void onCmd(RTP_CommandEvent e) {
         if (e instanceof RTP_CommandEvent_After) return;
-        String _str = e.getSendi().getName() + " executed `/rtp " + e.getCmd().getName() + "` at " + getDate();
+        String _str = e.getSendi().getName() + " executed `/srtp " + e.getCmd().getName() + "` at " + getDate();
         Level lvl = Level.INFO;
         if (e.getCmd() instanceof CmdReload)
             lvl = Level.WARNING;

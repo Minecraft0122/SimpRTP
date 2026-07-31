@@ -13,7 +13,7 @@ public abstract class Database {
     public Connection connection;
     public Main plugin;
     public String db_name;
-    public final String table = "BRTP_Data";
+    public final String table = "SimpRTP_Data";
 
     public Database(String db_name) {
         plugin = Main.getInstance();

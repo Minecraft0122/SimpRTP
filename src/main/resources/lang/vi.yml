@@ -27,7 +27,7 @@ Messages:
   Moved: '&cBạn đã di chuyển! &7Dịch chuyển ngẫu nhiên bị hủy'
   NotExist: '&cCó vẻ như thế giới &7%world% &ckhông tồn tại!'
   Already: '&cCó vẻ nhưuu! &7Có vẻ như bạn đã chuẩn bị dịch chuyển, hãy kiên nhẫn một chút!'
-  Sign: '&7Lệnh bảng đã được tạo! &7Lệnh là... ''&f/rtp %command%&7'''
+  Sign: '&7Lệnh bảng đã được tạo! &7Lệnh là... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cLỗi! &7 Đầu vào không hợp lệ được cung cấp!'
     Set: '&bThành công! &7%type% đặt thành %value%'

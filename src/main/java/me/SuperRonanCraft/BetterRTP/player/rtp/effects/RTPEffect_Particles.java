@@ -4,24 +4,18 @@ import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.references.file.FileOther;
 import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import xyz.xenondevs.particle.ParticleEffect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//---
-//Credit to @ByteZ1337 for ParticleLib - https://github.com/ByteZ1337/ParticleLib
-//
-//Use of particle creation
-//---
-
 public class RTPEffect_Particles {
 
     private boolean enabled;
-    private final List<ParticleEffect> effects = new ArrayList<>();
+    private final List<Particle> effects = new ArrayList<>();
     private String shape;
     private final int precision = 16;
 
@@ -35,8 +29,8 @@ public class RTPEffect_Particles {
     void load() {
         FileOther.FILETYPE config = getPl().getFiles().getType(FileOther.FILETYPE.EFFECTS);
         enabled = config.getBoolean("Particles.Enabled");
+        effects.clear();
         if (!enabled) return;
-        //Enabled? Load all this junk
         List<String> types;
         if (config.isList("Particles.Type"))
             types = config.getStringList("Particles.Type");
@@ -44,26 +38,26 @@ public class RTPEffect_Particles {
             types = new ArrayList<>();
             types.add(config.getString("Particles.Type"));
         }
-        String typeTrying = null;
-        try {
-            for (String type : types) {
-                typeTrying = type;
-                effects.add(ParticleEffect.valueOf(type.toUpperCase()));
+        for (String type : types) {
+            try {
+                Particle particle = Particle.valueOf(type.toUpperCase());
+                if (particle.getDataType() != Void.class) {
+                    getPl().getLogger().warning("Particle '" + type + "' requires extra data and was ignored");
+                    continue;
+                }
+                effects.add(particle);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                getPl().getLogger().warning("Particle '" + type + "' does not exist in this server version and was ignored");
             }
-        } catch (IllegalArgumentException | NullPointerException e) {
-            effects.clear();
-            effects.add(ParticleEffect.ASH);
-            getPl().getLogger().severe("The particle '" + typeTrying + "' doesn't exist! Default particle enabled... " +
-                    "Try using '/rtp info particles' to get a list of available particles");
-        } catch (ExceptionInInitializerError | NoClassDefFoundError e2) {
-            effects.clear();
-            getPl().getLogger().severe("The particle '" + typeTrying + "' created a fatal error when loading particles! Your MC version isn't supported!");
-            enabled = false;
+        }
+        if (effects.isEmpty()) {
+            effects.add(Particle.ASH);
+            getPl().getLogger().warning("No usable particle was configured; using ASH");
         }
         shape = config.getString("Particles.Shape").toUpperCase();
         if (!Arrays.asList(shapeTypes).contains(shape)) {
             getPl().getLogger().severe("The particle shape '" + shape + "' doesn't exist! Default particle shape enabled...");
-            getPl().getLogger().severe("Try using '/rtp info shapes' to get a list of shapes, or: " + Arrays.asList(shapeTypes));
+            getPl().getLogger().severe("Try using '/srtp info shapes' to get a list of shapes, or: " + Arrays.asList(shapeTypes));
             shape = shapeTypes[0];
         }
     }
@@ -84,8 +78,8 @@ public class RTPEffect_Particles {
                         partScan(p);
                         break;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (RuntimeException e) {
+                getPl().getLogger().warning("Unable to display RTP particles: " + e.getMessage());
             }
         });
     }
@@ -94,9 +88,8 @@ public class RTPEffect_Particles {
         Location loc = p.getLocation().add(new Vector(0, 1.75, 0));
         for (int index = 1; index < precision; index++) {
             Vector vec = getVecCircle(index);
-            for (ParticleEffect effect : effects) {
-                effect.display(loc.clone().add(vec), new Vector(0, -0.125, 0), .15f, 0, null, p);
-            }
+            for (Particle effect : effects)
+                p.spawnParticle(effect, loc.clone().add(vec), 0, 0, -0.125, 0, .15);
         }
     }
 
@@ -106,9 +99,8 @@ public class RTPEffect_Particles {
             for (int index = 1; index < precision; index++) {
                 //double yran = ran.nextGaussian() * pHeight;
                 Vector vec = getVecCircle(index).add(new Vector(0, y, 0));
-                for (ParticleEffect effect : effects) {
-                    effect.display(loc.clone().add(vec), p);
-                }
+                for (Particle effect : effects)
+                    p.spawnParticle(effect, loc.clone().add(vec), 1);
             }
     }
 
@@ -116,9 +108,8 @@ public class RTPEffect_Particles {
         Location loc = p.getLocation().add(new Vector(0, 1, 0));
         for (int index = 1; index < precision; index++) {
             Vector vec = getVecCircle(index);
-            for (ParticleEffect effect : effects) {
-                effect.display(loc.clone().add(vec), vec, 1.5f, 0, null, p);
-            }
+            for (Particle effect : effects)
+                p.spawnParticle(effect, loc.clone().add(vec), 0, vec.getX(), vec.getY(), vec.getZ(), 1.5);
         }
     }
 

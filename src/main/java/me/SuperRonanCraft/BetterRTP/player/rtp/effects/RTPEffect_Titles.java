@@ -1,13 +1,16 @@
 package me.SuperRonanCraft.BetterRTP.player.rtp.effects;
 
 import me.SuperRonanCraft.BetterRTP.references.file.FileOther;
-import me.SuperRonanCraft.BetterRTP.references.messages.Message;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
 public class RTPEffect_Titles {
+
+    private static final LegacyComponentSerializer LEGACY_TEXT = LegacyComponentSerializer.legacyAmpersand();
 
     boolean enabled = false;
     private final HashMap<RTP_TITLE_TYPE, RTP_TITLE> titles = new HashMap<>();
@@ -46,11 +49,7 @@ public class RTPEffect_Titles {
         // int fadeIn = getPl().text.getFadeIn();
         // int stay = text.getStay();
         // int fadeOut = text.getFadeOut();
-        title = Message.color(title);
-        sub = Message.color(sub);
-        //Message.smsTitle(p, Arrays.asList(title, sub));
-        p.sendTitle(title, sub);
-        // player.sendTitle(title, subTitle, fadeIn, stay, fadeOut);
+        p.showTitle(Title.title(LEGACY_TEXT.deserialize(title), LEGACY_TEXT.deserialize(sub)));
     }
 
     public enum RTP_TITLE_TYPE {

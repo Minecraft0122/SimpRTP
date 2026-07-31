@@ -16,7 +16,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import javax.security.auth.login.Configuration;
 import java.util.*;
 
 public class AddonRTPMenu implements Addon, Listener {
@@ -27,9 +26,7 @@ public class AddonRTPMenu implements Addon, Listener {
     @Getter private HashMap<String, RTPMenuWorldInfo> worlds = new HashMap<>();
 
     public MenuData getData(Player p) {
-        if (!playerData.containsKey(p))
-            playerData.put(p, new MenuData());
-        return playerData.getOrDefault(p, null);
+        return playerData.computeIfAbsent(p, ignored -> new MenuData());
     }
 
     @Override
@@ -42,6 +39,7 @@ public class AddonRTPMenu implements Addon, Listener {
         for (Player p : playerData.keySet())
             p.closeInventory();
         playerData.clear();
+        worlds.clear();
         settings.load(name); //Load settings
         ConfigurationSection config = getFile(Files.FILETYPE.CONFIG).getConfigurationSection("RTPMenu");
         List<Map<?, ?>> map = config.getMapList("WorldList");
@@ -62,10 +60,8 @@ public class AddonRTPMenu implements Addon, Listener {
                     if (test.get("Name").getClass() == String.class)
                         name = String.valueOf(test.get("Name").toString());
                 }
-                if (test.get("Lore") != null) {
-                    if (test.get("Lore").getClass() == ArrayList.class)
-                        lore = new ArrayList<String>((ArrayList) test.get("Lore"));
-                }
+                if (test.get("Lore") instanceof List<?> configuredLore)
+                    lore = configuredLore.stream().map(Object::toString).toList();
                 int slot = 0;
                 if (test.get("Slot") != null) {
                     if (test.get("Slot").getClass() == Integer.class)
@@ -98,30 +94,29 @@ public class AddonRTPMenu implements Addon, Listener {
         if (validClick(e)) {
             e.setCancelled(true);
             MenuData data = getData((Player) e.getWhoClicked());
-            CmdTeleport.teleport(e.getWhoClicked(), "rtp", data.getWorldSlots().get(e.getSlot()), null);
+            CmdTeleport.teleport(e.getWhoClicked(), "srtp", data.getWorldSlots().get(e.getSlot()), null);
             e.getWhoClicked().closeInventory();
         }
     }
 
     @EventHandler
     private void onTeleport(RTP_CommandEvent e) {
-        if (e.getCmd() instanceof CmdTeleport && e.getSendi() instanceof Player) {
+        if (e.getCmd() instanceof CmdTeleport && e.getSendi() instanceof Player player) {
             e.setCancelled(true);
-            Player player = (Player) e.getSendi();
             new RTPMenu_Refresh(this, player, settings.getRefresh());
         }
     }
 
     private boolean validClick(InventoryClickEvent e) {
         //Not a player, or Not our inventory
-        if (!(e.getWhoClicked() instanceof Player) || e.isCancelled())
+        if (!(e.getWhoClicked() instanceof Player player) || e.isCancelled())
             return false;
             // Item is clicked
         else if (e.getCurrentItem() == null || e.getCurrentItem().getType().equals(Material.AIR))
             return false;
-        else if (e.getWhoClicked() instanceof Player) {
+        else {
             // Clicks the inventory
-            MenuData data = playerData.getOrDefault((Player) e.getWhoClicked(), null);
+            MenuData data = playerData.get(player);
             if (data != null) {
                 if (!e.getInventory().equals(data.getMenuInv()))
                     return false;

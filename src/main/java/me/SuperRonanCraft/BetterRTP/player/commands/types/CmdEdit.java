@@ -142,9 +142,9 @@ public class CmdEdit implements RTPCommand, RTPCommandHelpable { //Edit a worlds
         usage(sendi, label, null);
     }
 
-    //rtp edit default <max/min/center/useworldborder> <value>
-    //rtp edit world [<world>] <max/min/center/useworldborder> <value>
-    //rtp edit worldtype <world> <value>
+    //srtp edit default <max/min/center/useworldborder> <value>
+    //srtp edit world [<world>] <max/min/center/useworldborder> <value>
+    //srtp edit worldtype <world> <value>
     @Override
     public List<String> tabComplete(CommandSender sendi, String[] args) {
         List<String> list = new ArrayList<>();
@@ -152,7 +152,7 @@ public class CmdEdit implements RTPCommand, RTPCommandHelpable { //Edit a worlds
             for (RTP_CMD_EDIT cmd : RTP_CMD_EDIT.values())
                 if (cmd.name().toLowerCase().startsWith(args[1].toLowerCase()))
                     list.add(cmd.name().toLowerCase());
-        } else if (args.length == 3) { //rtp edit <sub_cmd> <type>
+        } else if (args.length == 3) { //srtp edit <sub_cmd> <type>
             for (RTP_CMD_EDIT cmd : RTP_CMD_EDIT.values())
                 if (cmd.name().equalsIgnoreCase(args[1])) {
                     switch (cmd) {

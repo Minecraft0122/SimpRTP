@@ -27,7 +27,7 @@ Messages:
   Moved: '&cあなたは移動しました！ &7RTPはキャンセルされました！'
   NotExist: '&cワールド&7%world%&cが存在しないようです。'
   Already: '&cおっと！ &7あなたはすでにRTPしているように見えます。'
-#  Sign: '&7Command sign has been created! &7Command is... ''&f/rtp %command%&7'''
+#  Sign: '&7Command sign has been created! &7Command is... ''&f/srtp %command%&7'''
 #  Edit:
 #    Error: '&cError! &7Invalid input provided!'
 #    Set: '&bSuccess! &7%type% set to %value%'

@@ -96,8 +96,9 @@ public class WorldLocation implements RTPWorld, RTPWorld_Defaulted {
                     BetterRTP.debug("- - MinRad: " + minRad);
                 }
                 if (section.get("Biomes") != null) {
-                    if (section.get("Biomes").getClass() == ArrayList.class) {
-                        this.biomes = new ArrayList<String>((ArrayList) section.get("Biomes"));
+                    if (section.get("Biomes") instanceof List<?> biomeList) {
+                        this.biomes = biomeList.stream().map(Object::toString)
+                                .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
                         BetterRTP.debug("- - Biomes: " + this.biomes);
                     }
                 }

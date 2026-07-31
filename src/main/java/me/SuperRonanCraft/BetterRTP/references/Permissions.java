@@ -12,15 +12,7 @@ public class Permissions {
     }
 
     public boolean checkPerm(String str, CommandSender sendi) {
-        if (depPerms.hasPerm(str, sendi))
-            return true;
-
-        String prefix = PermissionCheck.getPrefix();
-        if (str.startsWith(prefix)) {
-            String legacy = PermissionCheck.getLegacyPrefix() + str.substring(prefix.length());
-            return depPerms.hasPerm(legacy, sendi);
-        }
-        return false;
+        return depPerms.hasPerm(str, sendi);
     }
 
 }

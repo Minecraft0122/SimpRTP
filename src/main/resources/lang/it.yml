@@ -27,7 +27,7 @@ Messages:
   Moved: '&cTi sei mosso, l''&7RTP è stato cancellato!'
   NotExist: '&cIl mondo &7%world% &cnon esiste!'
   Already: '&cAttendi, un teletrasporto è già in corso!'
-  Sign: '&7Cartello creato, il comando che eseguirà è: ''&f/rtp %command%&7'''
+  Sign: '&7Cartello creato, il comando che eseguirà è: ''&f/srtp %command%&7'''
   Edit:
     Error: '&cErrore! &7Input digitato non corretto!'
     Set: '&f%type% &aimpostato su &f%value%'

@@ -88,8 +88,9 @@ public class WorldCustom implements RTPWorld, RTPWorld_Defaulted {
                     }
                 }
                 if (test.get("Biomes") != null) {
-                    if (test.get("Biomes").getClass() == ArrayList.class) {
-                        this.biomes = new ArrayList<String>((ArrayList) test.get("Biomes"));
+                    if (test.get("Biomes") instanceof List<?> biomeList) {
+                        this.biomes = biomeList.stream().map(Object::toString)
+                                .collect(java.util.stream.Collectors.toCollection(ArrayList::new));
                         BetterRTP.debug("- Biomes: " + this.biomes);
                     }
                 }

@@ -48,7 +48,7 @@ public class AddonsHandler {
         EXTRAEFFECTS(new AddonExtraEffects()),  //New cosmetica!
         COMMANDS(new AddonCommands()),          //Commands on rtp events
         PARTY_RTP(new AddonParty()),            //Adds parties!
-        RTP_MENU(new AddonRTPMenu()),           //Adds /rtp menu
+        RTP_MENU(new AddonRTPMenu()),           //Adds /srtp menu
         ;
 
         final Addon addon;

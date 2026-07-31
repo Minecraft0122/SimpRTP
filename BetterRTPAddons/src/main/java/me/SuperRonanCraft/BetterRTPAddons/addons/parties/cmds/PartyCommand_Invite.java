@@ -38,7 +38,7 @@ public class PartyCommand_Invite implements PartyCommands, PartyCommandsTabable 
 
     }
 
-    //rtp party invite [args]
+    //srtp party invite [args]
     @Override
     public List<String> tabComplete(CommandSender sendi, String[] args, AddonParty addon) {
         List<String> list = new ArrayList<>();

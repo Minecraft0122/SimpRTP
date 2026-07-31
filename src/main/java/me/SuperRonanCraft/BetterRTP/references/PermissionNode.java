@@ -16,7 +16,6 @@ public enum PermissionNode implements PermissionCheck {
     SETTINGS("settings"),
     INFO("info"),
     LANGUAGE("language"),
-    UPDATER("updater"),
     RTP_OTHER("player"),
     BIOME("biome"),
     WORLD("world"),
@@ -24,7 +23,6 @@ public enum PermissionNode implements PermissionCheck {
     VERSION("version"),
     EDIT("edit"),
     LOCATION("location"),
-    DEVELOPER("DEVELOPER_PERM"),
     ;
 
     private final String node;
@@ -33,7 +31,4 @@ public enum PermissionNode implements PermissionCheck {
         this.node = PermissionCheck.getPrefix() + node;
     }
 
-    @Override public boolean isDev() {
-        return this == DEVELOPER;
-    }
 }

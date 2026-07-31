@@ -28,7 +28,7 @@ Messages:
   Moved: '&cVous avez bougé ! &7Téléportation annulée !'
   NotExist: '&cLe monde &7%world% &cn''existe pas !'
   Already: '&cOups! &7Il semblerait que vous essaiyez déjà de vous téléporter... Patientez un peu !'
-  Sign: '&7Le panneau de commande a été créé ! &7La commande est... ''&f/rtp %command%&7'''
+  Sign: '&7Le panneau de commande a été créé ! &7La commande est... ''&f/srtp %command%&7'''
   Edit:
     Error: '&cErreur ! &cEntrée invalide !'
     Set: '&aSuccès ! %type% définie sur %value%'

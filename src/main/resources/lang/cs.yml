@@ -27,7 +27,7 @@ Messages:
   Moved: '&cPohl/a jsi se! &7Teleport byl zrušen!'
   NotExist: '&cVypadá to, že svět &7%world% &cneexistuje!'
   Already: '&cUps! &7Vypadá to, že se už teleportuješ! Měj trochu strpení!'
-  Sign: '&7Cedulka s příkazem vytvořena! &7Příkaz je... ''&f/rtp %command%&7''.'
+  Sign: '&7Cedulka s příkazem vytvořena! &7Příkaz je... ''&f/srtp %command%&7''.'
   Edit:
     Error: '&cError! &7Zadána neplatná hodnota!'
     Set: '&bÚspěch! &7%type% nastaveno na %value%'

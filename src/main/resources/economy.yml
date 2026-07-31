@@ -13,7 +13,7 @@ CustomWorlds:
   ## 是否为自定义世界启用独立收费
   Enabled: true
   Prices:
-    ## 没有 simprtp.bypass.economy 权限的玩家在 world 中使用 /rtp 时收取 50
+    ## 没有 simprtp.bypass.economy 权限的玩家在 world 中使用 /srtp 时收取 50
   - world: 50
     ## 价格设为 0 时会发送 Success.Bypass 消息
   - world_end: 0

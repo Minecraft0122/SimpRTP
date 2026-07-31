@@ -19,7 +19,6 @@ public enum MessagesCore {
     OTHER_BIOME("Other.Biome"),
     NOTEXIST("NotExist"),
     RELOAD("Reload"),
-    UPDATE("Update"),
     NOPERMISSION("NoPermission.Basic"),
     NOPERMISSION_WORLD("NoPermission.World"),
     DISABLED_WORLD("DisabledWorld"),

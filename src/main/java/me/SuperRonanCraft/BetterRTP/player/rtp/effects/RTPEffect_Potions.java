@@ -4,6 +4,10 @@ import me.SuperRonanCraft.BetterRTP.BetterRTP;
 import me.SuperRonanCraft.BetterRTP.references.file.FileOther;
 import me.SuperRonanCraft.BetterRTP.references.player.HelperPlayer;
 import me.SuperRonanCraft.BetterRTP.versions.AsyncHandler;
+import io.papermc.paper.registry.RegistryAccess;
+import io.papermc.paper.registry.RegistryKey;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -11,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class RTPEffect_Potions { //Potions AND Invincibility
 
@@ -34,18 +39,23 @@ public class RTPEffect_Potions { //Potions AND Invincibility
             for (String p : list) {
                 String[] ary = p.replaceAll(" ", "").split(":");
                 String type = ary[0].trim();
-                PotionEffectType effect = PotionEffectType.getByName(type);
+                String normalized = type.toLowerCase(Locale.ROOT);
+                NamespacedKey key = NamespacedKey.fromString(normalized);
+                if (key == null && !normalized.contains(":"))
+                    key = NamespacedKey.minecraft(normalized);
+                Registry<PotionEffectType> registry = RegistryAccess.registryAccess().getRegistry(RegistryKey.MOB_EFFECT);
+                PotionEffectType effect = key == null ? null : registry.get(key);
                 if (effect != null) {
                     try {
                         int duration = ary.length >= 2 ? Integer.parseInt(ary[1]) : 60;
-                        int amplifier = ary.length >= 3 ? Integer.parseInt(ary[2]) : 1;
+                        int amplifier = Math.max(0, (ary.length >= 3 ? Integer.parseInt(ary[2]) : 1) - 1);
                         potionEffects.put(effect, new Integer[] {duration, amplifier});
                     } catch (NumberFormatException e) {
                         BetterRTP.getInstance().getLogger().info("The potion duration or amplifier `" + ary[1] + "` is not an integer. Effect was removed!");
                     }
                 } else
                     BetterRTP.getInstance().getLogger().info("The potion effect `" + type + "` does not exist! " +
-                            "Please fix or remove this potion effect! Try '/rtp info potion_effects' to get a list of valid effects!");
+                            "Please fix or remove this potion effect! Try '/srtp info potion_effects' to get a list of valid effects!");
             }
         }
     }
